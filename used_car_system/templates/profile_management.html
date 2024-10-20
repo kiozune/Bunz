@@ -1,0 +1,61 @@
+{% include 'header.html' %}
+
+<div class="container">
+    <h1>Profile Management</h1>
+    <a href="{{ url_for('create_profile.create_profile') }}">Create Profile</a>
+    <h2>Existing Profile</h2>
+    <form action="{{ url_for('search_profile.search_profile') }}" method="GET">
+        <label for="query">Search Profile:</label>
+        <input type="text" name="query" placeholder="Search Profile" value="{{ request.args.get('query', '') }}">
+        <input type="submit" value="Search">
+    </form>
+    <a href="{{ url_for('view_profile.view_profile') }}">Shows all</a>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div id="flash-messages">
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+    <table>
+        <tr>
+            <th>Role</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Action</th>
+            <th>Suspend</th>
+        </tr>
+        {% if profiles %}
+        {% for profile in profiles %}
+        <tr>
+            <td>{{ profile.role }}</td>
+            <td>{{ profile.description }}</td>
+            {% if profile.is_suspended %}
+                <td style="color: red;">Suspended</td>
+            {% else %}
+                <td style="color: green;">Active</td>
+            {% endif %}
+        <td>
+                <a href="{{ url_for('update_profile.update_profile', id=profile.id) }}">Update</a>
+            </td>
+            {% if profile.is_suspended %}
+                <td>
+                    Suspend
+                </td>
+            {% else %}
+                <td>
+                    <a href="{{ url_for('suspend_profile.suspend_profile', id=profile.id) }}">Suspend</a>
+                </td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+        {% else %}
+    <a>No profiles found.</a>
+{% endif %}
+    </table>
+
+</div>
+
+{% include 'footer.html' %}

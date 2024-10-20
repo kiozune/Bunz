@@ -1,0 +1,10 @@
+Single-database configuration for Flask.
+
+whenever make any changes to the database please migrate and update the versions using the command below
+
+flask db migrate -m "changes descriptions"
+flask db upgrade
+
+
+to rollback to the previous database version pls use the command below
+flask db downgrade

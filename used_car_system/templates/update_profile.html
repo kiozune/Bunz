@@ -1,0 +1,23 @@
+{% include 'header.html' %}
+
+<body>
+    <h1>Update Profile: {{ profile.username }}</h1>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        {{ form.role.label }} {{ form.role() }}<br>
+        {{ form.description.label }} {{ form.description() }}<br>
+        {{ form.submit() }}
+    </form>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div id="flash-messages">
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+    <a href="{{ url_for('view_profile.view_profile') }}">Back to User Management</a>
+</body>
+
+{% include 'footer.html' %}
