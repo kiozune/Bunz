@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, request
 from models import UserProfile
-from forms import UserProfileForm
+from forms import UserProfileForm, UpdateUserProfileForm
 
 # Create Profile Controller
 create_profile_bp = Blueprint('create_profile', __name__)
@@ -47,7 +47,7 @@ class UpdateProfileController:
         profile = UserProfile.get_profile_by_id(id)
 
         # Initialize the form and populate it with the existing profile data
-        form = UserProfileForm(obj=profile)
+        form = UpdateUserProfileForm(obj=profile)
         if form.validate_on_submit():
             try:
                 updated_profile = UserProfile.update_profile(
@@ -69,13 +69,9 @@ suspend_profile_bp = Blueprint('suspend_profile', __name__)
 class SuspendProfileController:
     @staticmethod
     @suspend_profile_bp.route('/suspend_profile/<int:id>', methods=['GET'])
-    def suspend_profile(id):
-        try:
-            suspend_profile = UserProfile.suspend_profile(id)
-            flash(f"Profile {suspend_profile.role} has been suspended successfully", 'success')
-        except ValueError as e:
-            flash(str(e), 'danger')
-            return redirect(url_for('view_profile.view_profile', id=id))
+    def suspend_profile(profile_id):
+        suspend_profile = UserProfile.suspend_profile(profile_id)
+        flash(f"Profile {suspend_profile.role} has been suspended successfully", 'success')
         return render_template('profile_management.html')
 
 
