@@ -42,9 +42,6 @@ class UserProfile(db.Model):
     def update_profile(cls, profile_id, new_role, new_description):
         profile = cls.query.get(profile_id)
 
-        if not profile:
-            raise ValueError(f"Profile with id {profile} not found")
-
         if new_role != profile.role:
             existing_role = cls.query.filter_by(role=new_role).first()
             if existing_role:
@@ -58,14 +55,9 @@ class UserProfile(db.Model):
     @classmethod
     def suspend_profile(cls, profile_id):
         profile = cls.query.get(profile_id)
-        if not profile:
-            raise ValueError(f"Profile with id {profile} not found")
-        elif profile.is_suspended:
-            raise ValueError(f"Profile with id {profile_id} is already suspended")
-        else:
-            profile.is_suspended = True
-            db.session.commit()
-            return profile
+        profile.is_suspended = True
+        db.session.commit()
+        return profile
 
     @classmethod
     def search_profile(cls, query):
