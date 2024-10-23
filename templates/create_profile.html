@@ -1,0 +1,21 @@
+{% include 'header.html' %}
+    <div class="container">
+        <h1>Create Profile</h1>
+        <form action="{{ url_for('create_profile.create_profile') }}" method="POST">
+            {{ form.hidden_tag() }}
+            {{ form.role.label }} {{ form.role(size=32) }}<br>
+            {{ form.description.label }} {{ form.description(rows=4, cols=40) }}<br>
+            {{ form.submit() }}
+        </form>
+        <a href="{{ url_for('view_profile.view_profile') }}">Back to Profile Management</a>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <div id="flash-messages">
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
+    </div>
+{% include 'footer.html' %}

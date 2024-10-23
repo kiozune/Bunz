@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0349124b-cb20-4be9-a303-e4584d5e2fcc" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/used_car_system/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/used_car_system/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/used_car_system/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/used_car_system/.idea/used_car_system.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/used_car_system.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/used_car_system/README.txt" beforeDir="false" afterPath="$PROJECT_DIR$/README.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/used_car_system/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/used_car_system/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/used_car_system/controllers/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/used_car_system/controllers/profile_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/profile_controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/used_car_system/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/used_car_system/migrations/README" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/README" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/used_car_system/migrations/alembic.ini" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/alembic.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/used_car_system/migrations/env.py" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/env.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/used_car_system/migrations/script.py.mako" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/script.py.mako" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/used_car_system/migrations/versions/3c073acc11f0_add_is_suspended_to_user_profile.py" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/versions/3c073acc11f0_add_is_suspended_to_user_profile.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/used_car_system/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/used_car_system/models/profile_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/profile_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/used_car_system/requirement.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirement.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/used_car_system/static/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/used_car_system/templates/create_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/create_profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/used_car_system/templates/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/footer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/used_car_system/templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/used_car_system/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/used_car_system/templates/profile_management.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/profile_management.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/used_car_system/templates/update_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/update_profile.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 0
+}]]></component>
+  <component name="ProjectId" id="2nq8ERRYpv6RLBWXhUGg8zZN8Nk" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.app.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\yeeha\OneDrive\Documents\GitHub\Bunz\" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-09665e90c3a7-d3b881c8e49f-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-233.15026.15" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0349124b-cb20-4be9-a303-e4584d5e2fcc" name="Changes" comment="" />
+      <created>1729689134610</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1729689134610</updated>
+    </task>
+    <servers />
+  </component>
+</project>
