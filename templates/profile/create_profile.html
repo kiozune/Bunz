@@ -1,0 +1,33 @@
+{% include 'header.html' %}
+    <div class="container">
+        <h1>Create Profile</h1>
+        <form action="{{ url_for('create_profile.create_profile') }}" method="POST" onsubmit="return validateForm()">
+            <a>Profile:</a>
+             <input type="text" name="role" required pattern=".{1,50}" title="Role must be 1-50 characters long."/><br>
+            <br>
+            <a>Description:</a>
+            <br>
+            <textarea name="description" rows="4" cols="40"></textarea>
+            <br>
+            <input type="submit" value="Create Profile"/>
+        </form>
+        <a href="{{ url_for('view_profile.view_profile') }}">Back to Profile Management</a>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <div id="flash-messages">
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
+    </div>
+{% include 'footer.html' %}
+
+<script src="{{ url_for('static', filename='js/validateform.js') }}"></script>
+<script>
+    const redirectPageURL = "{{ url_for('view_profile.view_profile') }}";
+</script>
+<script src="{{ url_for('static', filename='js/countdown_timer.js') }}"></script>

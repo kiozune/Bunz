@@ -1,6 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, request
 from models import UserProfile
-from forms import UserProfileForm, UpdateUserProfileForm
 
 # Create Profile Controller
 create_profile_bp = Blueprint('create_profile', __name__)
@@ -8,22 +7,19 @@ class CreateProfileController:
     @staticmethod
     @create_profile_bp.route('/create_profile', methods=['GET', 'POST'])
     def create_profile():
-        # Create an instance for UserProfileForm()
-        form = UserProfileForm()
-        if form.validate_on_submit():
+        if request.method == 'POST':
+            role = request.form.get('role').strip()
+            description = request.form.get('description').strip()
+
             try:
-                new_profile = UserProfile.create_profile(
-                    role=form.role.data,
-                    description=form.description.data
-                )
+                new_profile = UserProfile.create_profile(role, description)
                 # Flash message if the role is successfully created
-                flash(f'{new_profile.role} created successfully!', 'success')
-                return redirect(url_for('view_profile.view_profile'))
+                flash(f'{role} created successfully!', 'success')
             except ValueError as e:
                 # Flash the error message to notify the users
                 flash(str(e), 'danger')
-                return redirect(url_for('create_profile.create_profile'))
-        return render_template('create_profile.html', form=form)
+                return render_template('profile/create_profile.html')
+        return render_template('profile/create_profile.html')
 
 
 # View Profile Controller
@@ -34,10 +30,10 @@ class ViewProfileController:
     def view_profile():
         # Instance that get all the profile stored in the database
         profiles = UserProfile.get_all_profile()
-        return render_template('profile_management.html', profiles=profiles)
+        return render_template('profile/profile_management.html', profiles=profiles)
 
 
-#Update profile details controller
+# Update profile details controller
 update_profile_bp = Blueprint('update_profile', __name__)
 class UpdateProfileController:
     @staticmethod
@@ -45,34 +41,34 @@ class UpdateProfileController:
     def update_profile(id):
         # Retrieve the existing profile by ID
         profile = UserProfile.get_profile_by_id(id)
+        if request.method == 'POST':
+            role = request.form.get('role').strip()
+            description = request.form.get('description').strip()
 
-        # Initialize the form and populate it with the existing profile data
-        form = UpdateUserProfileForm(obj=profile)
-        if form.validate_on_submit():
             try:
                 updated_profile = UserProfile.update_profile(
-                    profile_id=id,
-                    new_role=form.role.data,
-                    new_description=form.description.data
+                    profile.id, role, description
                 )
-                flash(f'Profile for role "{updated_profile.role}" updated successfully!', 'success')
-                return redirect(url_for('view_profile.view_profile', id=profile.id))
+                flash(f'Profile for role "{role}" updated successfully!', 'success')
             except ValueError as e:
                 flash(str(e), 'danger')
-                return redirect(url_for('update_profile.update_profile', id=id))
+                return render_template('profile/update_profile.html', id=id)
 
-        return render_template('update_profile.html', form=form, profile=profile)
+        return render_template('profile/update_profile.html', profile=profile)
 
 
 # Suspend profile controller
 suspend_profile_bp = Blueprint('suspend_profile', __name__)
 class SuspendProfileController:
     @staticmethod
-    @suspend_profile_bp.route('/suspend_profile/<int:id>', methods=['GET'])
-    def suspend_profile(profile_id):
-        suspend_profile = UserProfile.suspend_profile(profile_id)
-        flash(f"Profile {suspend_profile.role} has been suspended successfully", 'success')
-        return render_template('profile_management.html')
+    @suspend_profile_bp.route('/suspend_profile/<int:id>', methods=['POST'])
+    def suspend_profile(id):
+        profile = UserProfile.get_all_profile()
+        try:
+            flash(f"Profile {UserProfile.get_profile_by_id(id).role} has been suspended successfully", 'success')
+            return redirect(url_for('view_profile.view_profile'))
+        except ValueError as e:
+            flash(str(e), 'danger')
 
 
 # Search the profile controller
@@ -81,10 +77,9 @@ class SearchProfileController:
     @staticmethod
     @search_profile_bp.route('/search_profile', methods=['GET', 'POST'])
     def search_profile():
-        query = request.args.get('query', '')
+        query = request.args.get('query', '').strip()
+        results = []
         if query:
             results = UserProfile.search_profile(query)
-            if not results:
-                flash('No Profile Found', 'info')
-            return render_template('profile_management.html', profiles=results, query=query)
-        return render_template('profile_management.html', profiles=[], query=query)
+            return render_template('profile/profile_management.html', profiles=results or [], query=query)
+        return render_template('profile/profile_management.html', profiles=results, query=query)

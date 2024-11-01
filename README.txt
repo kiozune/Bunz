@@ -7,7 +7,8 @@ Steps to setup Virtual environment and packages in pycharm
 4.  in the terminal ( 5th on the nav bar at the bottom left of pycharm)
 5. paste the following script and run
     a) .venv\Scripts\activate
-6. File --> setting --> project --> project structure --> click on the .venv directory
+6. File --> setting --> project -->
+project structure --> click on the .venv directory
    --> mark as sources (when ur folder become blue which mean you are on the correct path)
 
 7. Use (python --version) in terminal to check if the presence of VE
@@ -17,3 +18,6 @@ Steps to setup Virtual environment and packages in pycharm
 9. if yes continue to the next step by copy and paste the following command:
     a. pip install -r requirement.txt
  10. once installation success you should be able to run the app.py
+
+
+

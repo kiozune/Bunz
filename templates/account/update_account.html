@@ -1,0 +1,36 @@
+{% include 'header.html' %}
+
+<body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div id="flash-messages">
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+            Redirecting in <span id="countdown_timer">3</span> seconds...
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+    <h1>Update Profile: {{ profile.username }}</h1>
+    <form method="POST">
+        <form action="{{ url_for('update_profile.update_profile', id=profile.id) }}" method="POST" onsubmit="return validateForm()">
+            <a>Profile:</a>
+            <input type="text" value="{{ profile.role }}" name="role" required pattern=".{1,50}" title="Role must be 1-50 characters long."/><br>
+            <br>
+            <a>Description:</a>
+            <br>
+            <textarea name="description" rows="4" cols="40">{{ profile.description }}</textarea>
+            <br>
+            <input type="submit" value="Update Profile"/>
+        </form>
+    </form>
+
+    <a href="{{ url_for('view_profile.view_profile') }}">Back to User Management</a>
+</body>
+
+{% include 'footer.html' %}
+<script src="{{ url_for('static', filename='js/validateform.js') }}"></script>
+<script>
+    const redirectPageURL = "{{ url_for('view_profile.view_profile') }}";
+</script>
+<script src="{{ url_for('static', filename='js/countdown_timer.js') }}"></script>

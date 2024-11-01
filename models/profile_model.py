@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.exc import IntegrityError
 
 db = SQLAlchemy()
 
@@ -19,8 +20,11 @@ class UserProfile(db.Model):
 
         new_profile = cls(role=role, description=description)
         db.session.add(new_profile)
-        db.session.commit()
-        return new_profile
+        try:
+            db.session.commit()
+        except IntegrityError:
+            db.session.rollback()
+            raise ValueError("An error occurred while saving user profile. ")
 
     @classmethod
     def get_all_profile(cls):
@@ -49,15 +53,22 @@ class UserProfile(db.Model):
 
         profile.role = new_role
         profile.description = new_description
-        db.session.commit()
-        return profile
+        try:
+            db.session.commit()
+        except IntegrityError:
+            db.session.rollback()
+            raise ValueError("An error occurred while saving user profile. ")
 
     @classmethod
     def suspend_profile(cls, profile_id):
         profile = cls.query.get(profile_id)
         profile.is_suspended = True
-        db.session.commit()
-        return profile
+        try:
+            db.session.commit()
+            return profile.role
+        except IntegrityError:
+            db.session.rollback()
+            raise ValueError("An error occurred while saving user profile. ")
 
     @classmethod
     def search_profile(cls, query):

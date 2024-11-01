@@ -5,15 +5,42 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0349124b-cb20-4be9-a303-e4584d5e2fcc" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/controllers/account_controller.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/account_model.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/js/countdown_timer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/js/validateform.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/account/account_management.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/account/create_account.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/account/update_account.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/profile/create_profile.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/profile/profile_management.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/profile/update_profile.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.txt" beforeDir="false" afterPath="$PROJECT_DIR$/README.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/profile_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/profile_controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/forms.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/profile_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/profile_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirement.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirement.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/create_profile.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/footer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/profile_management.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/update_profile.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+        <option value="HTML File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -23,21 +50,27 @@
   &quot;associatedIndex&quot;: 0
 }</component>
   <component name="ProjectId" id="2nq8ERRYpv6RLBWXhUGg8zZN8Nk" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.app.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Python.app.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/yeeha/OneDrive/Documents/GitHub/Bunz/templates/profile",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\yeeha\OneDrive\Documents\GitHub\Bunz\templates\profile" />
       <recent name="C:\Users\yeeha\OneDrive\Documents\GitHub\Bunz\" />
     </key>
   </component>
