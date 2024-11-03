@@ -10,7 +10,8 @@
     <div class="navbar">
         <div>
             <a href="{{ url_for('index') }}">Home</a>
-            <a href="#">Car Listings</a>
+             <a href="{{ url_for('used_car.get_listings') }}">Car Listings</a>
+            <a href="{{ url_for('add_car_listing') }}">Add Car Listing</a>
             <a href="#">Loan Calculator</a>
         </div>
 
@@ -19,7 +20,7 @@
             <div class="dropdown-content">
                 <a href="{{ url_for('view_profile.view_profile') }}">Manage Profiles</a>
                 <a href="#">Manage Users</a>
-                <a href="#">My Cars</a>
+               <a href="#">My Cars</a>
                 <a href="#">Logout</a>
             </div>
         </div>
