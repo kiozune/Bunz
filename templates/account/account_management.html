@@ -2,15 +2,15 @@
 
 <div class="container">
     <h1>Profile Management</h1>
-    <h2>Create New Profile</h2>
-    <button onclick="window.location.href='{{ url_for('create_profile.create_profile') }}'">Create Profile</button>
+    <h2>Create New Account</h2>
+    <button onclick="window.location.href='{{ url_for('create_account.create_account') }}'">Create Account</button>
     <hr>    
-    <h2>Existing Profile</h2>
-    <form action="{{ url_for('search_profile.search_profile') }}" method="GET">
-        <label for="query">Search Profile:</label>
-        <input type="text" name="query" placeholder="Search Profile" value="{{ request.args.get('query', '') }}">
+    <h2>Existing Accounts</h2>
+        <form action="{{ url_for('search_account.search_account') }}" method="GET">
+        <label for="query">Search Account:</label>
+        <input type="text" name="query" placeholder="Search Account" value="{{ request.args.get('query', '') }}">
         <input type="submit" value="Search">
-        <a href="{{ url_for('view_profile.view_profile') }}">Clear</a>
+        <a href="{{ url_for('view_account.view_account') }}">Clear</a>
     </form>
 
     {% with messages = get_flashed_messages(with_categories=true) %}
@@ -25,36 +25,37 @@
 
     <table>
         <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Phone Number</th>
             <th>Role</th>
-            <th>Description</th>
             <th>Status</th>
             <th>Action</th>
             <th>Suspend</th>
         </tr>
 
-        {% if profiles %}
-            {% for profile in profiles %}
+        {% if account %}
+            {% for account in account %}
                 <tr>
-                    <td>{{ profile.role }}</td>
-                    <td>{{ profile.description }}</td>
-
-                    {% if profile.is_suspended %}
+                    <td>{{ account.username }}</td>
+                    <td>{{ account.email }}</td>
+                    <td>{{ account.phone_number }}</td>
+                    <td>{{ account.role.role }}</td>
+                    {% if account.is_suspended %}
                         <td style="color: red;">Suspended</td>
                     {% else %}
                         <td style="color: green;">Active</td>
                     {% endif %}
-
                     <td>
-                        <button onclick="window.location.href='{{ url_for('update_profile.update_profile', id=profile.id) }}'">Update</button>
+                        <button onclick="window.location.href='{{ url_for('update_account.update_account', id=account.id) }}'">Update</button>
                     </td>
-
-                    {% if profile.is_suspended %}
+                    {% if account.is_suspended %}
                         <td>
                             Suspended
                         </td>
                     {% else %}
                         <td>
-                            <form action="{{ url_for('suspend_profile.suspend_profile', id=profile.id) }}" method="POST" style="display:inline;">
+                            <form action="{{ url_for('suspend_account.suspend_account', id=account.id) }}" method="POST" style="display:inline;">
                                 <button type="submit">Suspend</button>
                             </form>
                         </td>
@@ -64,7 +65,7 @@
 
         {% else %}
             <tr>
-                <td colspan="100%">No profiles found matching your search.</td>
+                <td colspan="100%">No accounts found matching your search.</td>
             </tr>
         {% endif %}
     </table>

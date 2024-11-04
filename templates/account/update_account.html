@@ -6,31 +6,48 @@
         <div id="flash-messages">
           {% for category, message in messages %}
             <div class="alert alert-{{ category }}">{{ message }}</div>
-            Redirecting in <span id="countdown_timer">3</span> seconds...
+            {% if category == 'success' %}
+                <span id="redirect_message">
+                    Redirecting in <span id="countdown_timer">3</span> seconds...
+                </span>
+            {% endif %}
           {% endfor %}
         </div>
       {% endif %}
     {% endwith %}
-    <h1>Update Profile: {{ profile.username }}</h1>
+    <h1>Update Profile: {{ account.username }}</h1>
     <form method="POST">
-        <form action="{{ url_for('update_profile.update_profile', id=profile.id) }}" method="POST" onsubmit="return validateForm()">
-            <a>Profile:</a>
-            <input type="text" value="{{ profile.role }}" name="role" required pattern=".{1,50}" title="Role must be 1-50 characters long."/><br>
-            <br>
-            <a>Description:</a>
-            <br>
-            <textarea name="description" rows="4" cols="40">{{ profile.description }}</textarea>
+        <form action="{{ url_for('update_account.update_account', id=account.id) }}" method="POST" onsubmit="return validateForm()">
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" name="username" value="{{ account.username }}" readonly/>*
+            <span id="username_error"></span><br>
+
+            <br><label for="role_id">Role:</label><br>
+            <select id="role_id" name="role_id">
+                {% for role in roles %}
+                    <option value="{{ role.id }}" {% if role.id == account.role_id %}selected{% endif %}>{{ role.role }}</option>
+                {% endfor %}
+            </select>*
+            <span id="role_error"></span><br>
+
+            <br><label for="email">Email:</label><br>
+            <input type="text" id="email" name="email" value="{{ account.email }}"/>*
+            <span id="email_error"></span><br>
+
+            <br><label for="phone">Phone Number:</label><br>
+            <input type="text" id="phone" name="phone" value="{{ account.phone_number }}"/>*
+            <span id="phone_error"></span><br>
             <br>
             <input type="submit" value="Update Profile"/>
         </form>
     </form>
 
-    <a href="{{ url_for('view_profile.view_profile') }}">Back to User Management</a>
+    <a href="{{ url_for('view_account.view_account') }}">Back to Account Management</a>
 </body>
 
 {% include 'footer.html' %}
-<script src="{{ url_for('static', filename='js/validateform.js') }}"></script>
+<script src="{{ url_for('static', filename='js/accountformvalidation.js') }}"></script>
 <script>
-    const redirectPageURL = "{{ url_for('view_profile.view_profile') }}";
+    const redirectPageURL = "{{ url_for('view_account.view_account') }}";
 </script>
 <script src="{{ url_for('static', filename='js/countdown_timer.js') }}"></script>

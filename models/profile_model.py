@@ -1,7 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import IntegrityError
 
-db = SQLAlchemy()
+from . import db
 
 class UserProfile(db.Model):
     __tablename__ = 'user_profile'
@@ -72,7 +72,12 @@ class UserProfile(db.Model):
 
     @classmethod
     def search_profile(cls, query):
-        return cls.query.filter(cls.role.like(f'%{query}%')).all()
+        result = cls.query.filter(
+            cls.role.ilike(f'%{query}%') |
+            cls.description.ilike(f'%{query}%')
+        ).all()
+        return result
+
 
 
     def __repr__(self):

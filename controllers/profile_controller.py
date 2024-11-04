@@ -63,10 +63,11 @@ class SuspendProfileController:
     @staticmethod
     @suspend_profile_bp.route('/suspend_profile/<int:id>', methods=['POST'])
     def suspend_profile(id):
-        profile = UserProfile.get_all_profile()
+        profiles = UserProfile.get_all_profile()
         try:
+            suspend_profile = UserProfile.suspend_profile(id)
             flash(f"Profile {UserProfile.get_profile_by_id(id).role} has been suspended successfully", 'success')
-            return redirect(url_for('view_profile.view_profile'))
+            return render_template('profile/profile_management.html', profiles=profiles)
         except ValueError as e:
             flash(str(e), 'danger')
 
@@ -78,8 +79,10 @@ class SearchProfileController:
     @search_profile_bp.route('/search_profile', methods=['GET', 'POST'])
     def search_profile():
         query = request.args.get('query', '').strip()
-        results = []
-        if query:
+        profiles = UserProfile.get_all_profile()
+        if query == '':
+            return render_template('profile/profile_management.html', profiles=profiles)
+        elif query:
             results = UserProfile.search_profile(query)
-            return render_template('profile/profile_management.html', profiles=results or [], query=query)
-        return render_template('profile/profile_management.html', profiles=results, query=query)
+            return render_template('profile/profile_management.html', profiles=results, query=query)
+        return render_template('profile/profile_management.html', profiles=profiles)
