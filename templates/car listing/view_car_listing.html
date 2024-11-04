@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Listings</title>
+</head>
+<body>
+    <h1>Available Car Listings</h1>
+    {% for listing in car_listings %}
+        <h2>{{ listing.brand }} {{ listing.model }}</h2>
+        <p>Price: ${{ listing.price }}</p>
+        <p><a href="{{ url_for('used_car.car_details', listing_id=listing.id) }}">View Details</a></p>
+    {% endfor %}
+    <a href="{{ url_for('used_car.add_car_listing') }}">Add New Listing</a>
+</body>
+</html>

@@ -1,98 +1,88 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, render_template, jsonify, request, redirect, url_for
 from models.used_car_model import UsedCarListing
-import logging
 
-# Create a logger for your application
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
-
+# Initialize the blueprint
 used_car_bp = Blueprint('used_car', __name__)
 
+@used_car_bp.route('/add_car_listing', methods=['GET', 'POST'])
+def add_car_listing():
+    if request.method == 'POST':
+        data = request.get_json()
 
-@used_car_bp.route('/create_listing', methods=['POST'])
-def create_listing():
-    data = request.json
-    logger.info("Received data for creating a listing: %s", data)
+        required_fields = ['brand', 'model', 'year', 'price', 'seller_username']
+        for field in required_fields:
+            if not data.get(field):
+                return jsonify({'error': f"{field} is required."}), 400
 
-    # Validate the incoming data
-    required_fields = ['make', 'model', 'year', 'price']
-    for field in required_fields:
-        if field not in data:
-            logger.error("Missing field: %s", field)
-            return jsonify({"error": f"{field} is required."}), 400
+        try:
+            brand = data['brand']
+            model = data['model']
+            year = int(data['year'])
+            price = float(data['price'])
+            seller_username = data['seller_username']
+            description = data.get('description', '')
 
-    try:
-        UsedCarListing.create_listing(
-            make=data['make'],
-            model=data['model'],
-            year=data['year'],
-            price=data['price'],
-            description=data.get('description', '')
-        )
-        logger.info("Listing created successfully.")
-        return jsonify({"message": "Listing created successfully"}), 201
-    except ValueError as e:
-        logger.error("Error creating listing: %s", str(e))
-        return jsonify({"error": str(e)}), 400
+            listing = UsedCarListing.create_listing(
+                brand=brand,
+                model=model,
+                year=year,
+                price=price,
+                seller_username=seller_username,
+                description=description
+            )
 
+            # Redirect to the car listing view or the newly created listing
+            return redirect(url_for('used_car.car_listing'))  # Ensure this is correct
+        except ValueError as ve:
+            return jsonify({'error': str(ve)}), 400
+        except Exception as e:
+            return jsonify({'error': str(e)}), 500
 
-@used_car_bp.route('/listings', methods=['GET'])
-def get_listings():
+    return render_template('car listing/add_car_listing.html', title='Add Car Listing')
+
+@used_car_bp.route('/car_listing', methods=['GET'])
+def car_listing():
     listings = UsedCarListing.get_all_listings()
-    logger.info("Retrieved listings: %s", listings)
-    return jsonify([{
-        "id": listing.id,
-        "make": listing.make,
-        "model": listing.model,
-        "year": listing.year,
-        "price": listing.price,
-        "description": listing.description
-    } for listing in listings])
+    return render_template('car listing/view_car_listing.html', car_listings=listings)
 
-
-@used_car_bp.route('/update_listing/<int:listing_id>', methods=['PUT'])
-def update_listing(listing_id):
-    data = request.json
-    logger.info("Received data for updating listing %d: %s", listing_id, data)
-
+@used_car_bp.route('/car_details/<int:listing_id>', methods=['GET'])
+def car_details(listing_id):
     try:
-        UsedCarListing.update_listing(listing_id, **data)
-        logger.info("Listing updated successfully.")
-        return jsonify({"message": "Listing updated successfully"}), 200
-    except ValueError as e:
-        logger.error("Error updating listing %d: %s", listing_id, str(e))
-        return jsonify({"error": str(e)}), 400
+        listing = UsedCarListing.get_listing_by_id(listing_id)
+        return render_template('car listing/car_details.html', listing=listing)
+    except ValueError as ve:
+        return jsonify({'error': str(ve)}), 404
 
+@used_car_bp.route('/car_listing/edit/<int:listing_id>', methods=['GET', 'POST'])
+def edit_car_listing(listing_id):
+    try:
+        listing = UsedCarListing.get_listing_by_id(listing_id)
+    except ValueError as ve:
+        return jsonify({'error': str(ve)}), 404
 
-@used_car_bp.route('/delete_listing/<int:listing_id>', methods=['DELETE'])
+    if request.method == 'POST':
+        data = request.form
+        try:
+            updated_listing = UsedCarListing.update_listing(
+                listing_id,
+                brand=data['brand'],
+                model=data['model'],
+                year=int(data['year']),
+                price=float(data['price']),
+                description=data.get('description', '')
+            )
+            return redirect(url_for('used_car.car_details', listing_id=updated_listing.id))
+        except ValueError as ve:
+            return jsonify({'error': str(ve)}), 400
+
+    return render_template('car listing/edit_car_listing.html', listing=listing)
+
+@used_car_bp.route('/car_listing/delete/<int:listing_id>', methods=['POST'])
 def delete_listing(listing_id):
-    logger.info("Received request to delete listing %d", listing_id)
-
     try:
         UsedCarListing.delete_listing(listing_id)
-        logger.info("Listing deleted successfully.")
-        return jsonify({"message": "Listing deleted successfully"}), 200
-    except ValueError as e:
-        logger.error("Error deleting listing %d: %s", listing_id, str(e))
-        return jsonify({"error": str(e)}), 400
-
-
-@used_car_bp.route('/search_listings', methods=['GET'])
-def search_listings():
-    query = request.args.get('query', '')
-    logger.info("Searching listings with query: %s", query)
-
-    listings = UsedCarListing.query.filter(
-        (UsedCarListing.make.like(f"%{query}%")) |
-        (UsedCarListing.model.like(f"%{query}%"))
-    ).all()
-
-    logger.info("Found listings: %s", listings)
-    return jsonify([{
-        "id": listing.id,
-        "make": listing.make,
-        "model": listing.model,
-        "year": listing.year,
-        "price": listing.price,
-        "description": listing.description
-    } for listing in listings])
+        return redirect(url_for('used_car.car_listing'))  # Redirect after successful deletion
+    except ValueError as ve:
+        return jsonify({'error': str(ve)}), 404  # Return error if listing not found
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500  # Handle other exceptions

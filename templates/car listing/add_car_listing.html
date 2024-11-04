@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Car Listing</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <div class="navbar">
         <div>
             <a href="{{ url_for('index') }}">Home</a>
-            <a href="{{ url_for('used_car.get_listings') }}">Car Listings</a>
+          <a href="{{ url_for('used_car.car_listing') }}">View Car Listings</a>
             <a href="#">Loan Calculator</a>
         </div>
         <div class="dropdown">
@@ -26,50 +26,58 @@
         <a href="#" id="signin-btn">Sign In</a>
     </div>
 
-    <h2>Add Car Listing</h2>
-    <form id="car-listing-form">
-        <label for="make">Make:</label>
-        <input type="text" id="make" name="make" required>
+    <div class="container">
+        <h2>Add Car Listing</h2>
+        <form id="carListingForm" method="POST" action="{{ url_for('used_car.add_car_listing') }}">
+            <label for="brand">Brand:</label>
+            <input type="text" id="brand" name="brand" required>
 
-        <label for="model">Model:</label>
-        <input type="text" id="model" name="model" required>
+            <label for="model">Model:</label>
+            <input type="text" id="model" name="model" required>
 
-        <label for="year">Year:</label>
-        <input type="number" id="year" name="year" required>
+            <label for="year">Year:</label>
+            <input type="number" id="year" name="year" required>
 
-        <label for="price">Price:</label>
-        <input type="number" id="price" name="price" required>
+            <label for="price">Price:</label>
+            <input type="number" id="price" name="price" required>
 
-        <label for="description">Description:</label>
-        <textarea id="description" name="description"></textarea>
+            <label for="seller_username">Seller Username:</label>
+            <input type="text" id="seller_username" name="seller_username" required>
 
-        <button type="submit">Add Listing</button>
-    </form>
+            <label for="description">Description:</label>
+            <textarea id="description" name="description"></textarea>
+
+            <button type="submit">Add Listing</button>
+        </form>
+    </div>
 
     <script>
         $(document).ready(function() {
-            $('#car-listing-form').on('submit', function(event) {
+            $('#carListingForm').on('submit', function(event) {
                 event.preventDefault(); // Prevent the default form submission
 
                 const data = {
-                    make: $('#make').val(),
+                    brand: $('#brand').val(),
                     model: $('#model').val(),
                     year: $('#year').val(),
                     price: $('#price').val(),
+                    seller_username: $('#seller_username').val(),
                     description: $('#description').val()
                 };
 
                 $.ajax({
-                    url: '/used_car/create_listing', // Update this URL if needed
+                    url: '{{ url_for("used_car.add_car_listing") }}',
                     type: 'POST',
                     contentType: 'application/json',
                     data: JSON.stringify(data),
                     success: function(response) {
-                        alert(response.message);
-                        $('#car-listing-form')[0].reset(); // Clear the form
+                        alert(response.message);  // Show success message
+                        $('#carListingForm')[0].reset();  // Reset the form after submission
                     },
                     error: function(xhr) {
-                        alert('Error: ' + xhr.responseJSON.error);
+                        // Handle any errors that occur
+                        const errorMsg = xhr.responseJSON && xhr.responseJSON.error ? xhr.responseJSON.error : 'An unexpected error occurred.';
+                        alert('Error: ' + errorMsg);
                     }
                 });
             });

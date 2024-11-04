@@ -35,7 +35,7 @@ def index():
 def add_car_listing():
     return render_template('car listing/add_car_listing.html', title='Add Car Listing')
 
-# Include any other routes or logic here...
+
 
 if __name__ == '__main__':
     with app.app_context():
