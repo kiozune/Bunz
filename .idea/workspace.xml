@@ -5,10 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0349124b-cb20-4be9-a303-e4584d5e2fcc" name="Changes" comment="">
+<<<<<<< Updated upstream
       <change afterPath="$PROJECT_DIR$/migrations/versions/32b1def31f34_update_account_table_column.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/migrations/versions/ecb143c12cb3_add_is_suspended_to_account.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/static/js/accountformvalidation.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/templates/loan_calculator.html" afterDir="false" />
+=======
+      <change afterPath="$PROJECT_DIR$/static/js/accountformvalidation.js" afterDir="false" />
+>>>>>>> Stashed changes
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/account_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/account_controller.py" afterDir="false" />
@@ -16,10 +20,18 @@
       <change beforePath="$PROJECT_DIR$/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/account_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/account_model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/profile_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/profile_model.py" afterDir="false" />
+<<<<<<< Updated upstream
+=======
+      <change beforePath="$PROJECT_DIR$/static/js/countdown_timer.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/countdown_timer.js" afterDir="false" />
+>>>>>>> Stashed changes
       <change beforePath="$PROJECT_DIR$/templates/account/account_management.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/account_management.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/account/create_account.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/create_account.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/account/update_account.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/update_account.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/header.html" afterDir="false" />
+<<<<<<< Updated upstream
+=======
+      <change beforePath="$PROJECT_DIR$/templates/profile/profile_management.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/profile/profile_management.html" afterDir="false" />
+>>>>>>> Stashed changes
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,6 +96,7 @@
     </task>
     <servers />
   </component>
+<<<<<<< Updated upstream
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
@@ -106,5 +119,16 @@
         </entry>
       </map>
     </option>
+=======
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/controllers/__init__.py</url>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+>>>>>>> Stashed changes
   </component>
 </project>
