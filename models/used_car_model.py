@@ -90,3 +90,10 @@ class UsedCarListing(db.Model):
         except IntegrityError:
             db.session.rollback()
             raise ValueError("An error occurred while deleting the car listing.")
+
+    @staticmethod
+    def search_listings(search_query):
+        return UsedCarListing.query.filter(
+            (UsedCarListing.brand.ilike(f"%{search_query}%")) |
+            (UsedCarListing.model.ilike(f"%{search_query}%"))
+        ).all()

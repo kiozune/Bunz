@@ -86,3 +86,12 @@ def delete_listing(listing_id):
         return jsonify({'error': str(ve)}), 404  # Return error if listing not found
     except Exception as e:
         return jsonify({'error': str(e)}), 500  # Handle other exceptions
+
+@used_car_bp.route('/search', methods=['GET'])
+def search_car_listings():
+    search_query = request.args.get('search', '').strip()
+    if search_query:
+        filtered_listings = UsedCarListing.search_listings(search_query)
+    else:
+        filtered_listings = []
+    return render_template('car listing/search_results.html', car_listings=filtered_listings, search_query=search_query)
