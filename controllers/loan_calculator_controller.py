@@ -8,8 +8,8 @@ class LoanCalculatorController:
     @loan_calculator_bp.route('/loan_calculator', methods=['GET', 'POST'])
     def loan_calculator():
         if request.method == 'POST':
-            principal = int(request.form.get('principal').strip())
-            interest_rate = int(request.form.get('interest_rate').strip())
+            principal = float(request.form.get('principal').strip())
+            interest_rate = float(request.form.get('interest_rate').strip())
             years = int(request.form.get('years').strip())
 
             try:

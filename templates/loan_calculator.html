@@ -8,11 +8,20 @@
         <span class="alert-danger" id="principal_error"></span><br>
         <label for="interest_rate">Annual Interest Rate:</label>
         <input type="text" name="interest_rate" >
-        <span class="alert-danger" id="interest_rate"></span><br>
+        <span class="alert-danger" id="interest_rate_error"></span><br>
         <label for="years">Loan Term (years):</label>
         <input type="text" name="years" >
-        <span class="alert-danger" id="years"></span><br>
+        <span class="alert-danger" id="years_error"></span><br>
         <input type="submit" value="Calculate">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <div id="flash-messages">
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
         {% if result %}
             <h2>Monthly Installment:</h2>
             <p>$ {{ result }}</p>

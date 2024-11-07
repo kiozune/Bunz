@@ -8,4 +8,7 @@ class Calculator:
         monthly_interest_rate = self.annual_interest_rate / 100 / 12
         number_of_payments = self.years * 12
         monthly_payment = (self.principal * monthly_interest_rate) / (1 - (1 + monthly_interest_rate) ** -number_of_payments)
-        return monthly_payment
+        try:
+            return monthly_payment
+        except ValueError as e:
+            raise ValueError()
