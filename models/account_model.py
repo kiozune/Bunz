@@ -1,5 +1,5 @@
 from sqlalchemy.exc import IntegrityError
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 from .profile_model import UserProfile
 from . import db
 
@@ -19,6 +19,10 @@ class UserAccount(db.Model):
     # Hash password
     def set_password(self, password):
         self.password = generate_password_hash(password)
+
+    # Check hash password if match
+    def check_password(self, password):
+        return check_password_hash(self.password, password)
 
 # Create a new profile and load it into database for storage
     @classmethod

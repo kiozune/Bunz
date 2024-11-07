@@ -1,11 +1,13 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, request
 from models import UserProfile
+from utils import login_required
 
 # Create Profile Controller
 create_profile_bp = Blueprint('create_profile', __name__)
 class CreateProfileController:
     @staticmethod
     @create_profile_bp.route('/create_profile', methods=['GET', 'POST'])
+    @login_required
     def create_profile():
         if request.method == 'POST':
             role = request.form.get('role').strip()
@@ -27,6 +29,7 @@ view_profile_bp = Blueprint('view_profile', __name__)
 class ViewProfileController:
     @staticmethod
     @view_profile_bp.route('/view_profile')
+    @login_required
     def view_profile():
         # Instance that get all the profile stored in the database
         profiles = UserProfile.get_all_profile()
@@ -38,6 +41,7 @@ update_profile_bp = Blueprint('update_profile', __name__)
 class UpdateProfileController:
     @staticmethod
     @update_profile_bp.route('/update_profile/<int:id>', methods=['GET', 'POST'])
+    @login_required
     def update_profile(id):
         # Retrieve the existing profile by ID
         profile = UserProfile.get_profile_by_id(id)
@@ -62,6 +66,7 @@ suspend_profile_bp = Blueprint('suspend_profile', __name__)
 class SuspendProfileController:
     @staticmethod
     @suspend_profile_bp.route('/suspend_profile/<int:id>', methods=['POST'])
+    @login_required
     def suspend_profile(id):
         profiles = UserProfile.get_all_profile()
         try:
@@ -77,6 +82,7 @@ search_profile_bp = Blueprint('search_profile', __name__)
 class SearchProfileController:
     @staticmethod
     @search_profile_bp.route('/search_profile', methods=['GET', 'POST'])
+    @login_required
     def search_profile():
         query = request.args.get('query', '').strip()
         profiles = UserProfile.get_all_profile()

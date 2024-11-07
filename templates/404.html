@@ -1,0 +1,12 @@
+{% include 'header.html' %}
+
+  <h1>Oops! Page Not Found</h1>
+  <span id="redirect_message">
+      Redirecting to homepage in <span id="countdown_timer">5</span> seconds...
+  </span>
+
+{% include 'footer.html' %}
+<script>
+    const redirectPageURL = "{{ url_for('index') }}";
+</script>
+<script src="{{ url_for('static', filename='js/404_countdown_timer.js') }}"></script>

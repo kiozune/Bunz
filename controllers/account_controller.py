@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, request
 from models import UserAccount, UserProfile
+from utils import login_required
 from sqlalchemy.exc import IntegrityError
 
 # Create Account Controller
@@ -7,6 +8,7 @@ create_account_bp = Blueprint('create_account', __name__)
 class CreateAccountController:
     @staticmethod
     @create_account_bp.route('/create_account', methods=['GET', 'POST'])
+    @login_required
     def create_account():
         roles = UserProfile.query.all()
         if request.method == 'POST':
@@ -36,6 +38,7 @@ view_account_bp = Blueprint('view_account', __name__)
 class ViewAccountController:
     @staticmethod
     @view_account_bp.route('/view_account')
+    @login_required
     def view_account():
         # Instance that get all the accounts stored in the database
         account = UserAccount.get_all_accounts()
@@ -47,6 +50,7 @@ update_account_bp = Blueprint('update_account', __name__)
 class UpdateAccountController:
     @staticmethod
     @update_account_bp.route('/update_account/<int:id>', methods=['GET', 'POST'])
+    @login_required
     def update_account(id):
         # Retrieve the existing profile by ID
         # Retrieve the existing profile by ID
@@ -76,6 +80,7 @@ suspend_account_bp = Blueprint('suspend_account', __name__)
 class SuspendProfileController:
     @staticmethod
     @suspend_account_bp.route('/suspend_account/<int:id>', methods=['POST'])
+    @login_required
     def suspend_account(id):
         account = UserAccount.get_all_accounts()
         try:
@@ -91,6 +96,7 @@ search_account_bp = Blueprint('search_account', __name__)
 class SearchProfileController:
     @staticmethod
     @search_account_bp.route('/search_account', methods=['GET', 'POST'])
+    @login_required
     def search_account():
         query = request.args.get('query').strip()
         account = UserAccount.get_all_accounts()

@@ -2,7 +2,7 @@
     // Countdown timer
     let countdownElementID = document.getElementById('countdown_timer');
     let alertClass = document.getElementById('alert');
-    let time = 2;
+    let time = 4;
 
     function countdownTimer() {
         let countdownInterval = setInterval(function() {
