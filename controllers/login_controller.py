@@ -20,9 +20,9 @@ class LoginController:
                 return redirect(url_for('index'))
             else:
                 flash('Invalid username or password', 'danger')
-                return render_template('login.html')
+                return render_template('login.html', title='Login Page')
 
-        return render_template('login.html')
+        return render_template('login.html', title='Login Page')
 
     @staticmethod
     @login_bp.app_context_processor

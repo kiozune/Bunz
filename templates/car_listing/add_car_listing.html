@@ -1,0 +1,73 @@
+    {% include 'header.html' %}
+
+        <div class="container">
+            <h2>Add Car Listing</h2>
+            <form id="carListingForm" method="POST" action="{{ url_for('used_car.add_car_listing') }}">
+                <label for="brand">Brand:</label>
+                <input type="text" id="brand" name="brand" required>
+                <br><br>
+                <label for="model">Model:</label>
+                <input type="text" id="model" name="model" required>
+                <br><br>
+                <label for="year">Year:</label>
+                <input type="number" id="year" name="year" required>
+                <br><br>
+                <label for="price">Price:</label>
+                <input type="number" id="price" name="price" required>
+                <br><br>
+                <label for="seller_id">Seller Username:</label>
+                <select id="seller_id" name="seller_id" required>
+                    {% for account in accounts %}
+                        {% if account.role_id == 2 %}
+                            <option value="{{ account.id }}" {% if account.id == seller_id %}selected{% endif %}>
+                                {{ account.username }}
+                            </option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+                <br><br>
+                <label for="description">Description:</label>
+                <br>
+                <textarea id="description" name="description"></textarea>
+                <br>
+                <button type="submit">Add Listing</button>
+                <button onclick="window.location.href='{{ url_for('used_car.car_listing') }}'">
+                    Back to Car Listing
+                </button>
+            </form>
+        </div>
+
+        <script>
+            $(document).ready(function() {
+                $('#carListingForm').on('submit', function(event) {
+                    event.preventDefault(); // Prevent the default form submission
+
+                    const data = {
+                        brand: $('#brand').val(),
+                        model: $('#model').val(),
+                        year: $('#year').val(),
+                        price: $('#price').val(),
+                        seller_id: $('#seller_id').val(),
+                        description: $('#description').val()
+                    };
+
+                    $.ajax({
+                        url: '{{ url_for("used_car.add_car_listing") }}',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify(data),
+                        success: function(response) {
+                            alert(response.message);  // Show success message
+                            $('#carListingForm')[0].reset();  // Reset the form after submission
+                             window.location.href = "/car_listing";
+                        },
+                        error: function(xhr) {
+                            // Handle any errors that occur
+                            const errorMsg = xhr.responseJSON && xhr.responseJSON.error ? xhr.responseJSON.error : 'An unexpected error occurred.';
+                            alert('Error: ' + errorMsg);
+                        }
+                    });
+                });
+            });
+        </script>
+    {% include 'footer.html' %}

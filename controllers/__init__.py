@@ -3,3 +3,4 @@ from .account_controller import create_account_bp, view_account_bp, update_accou
 from .login_controller import login_bp
 from .logout_controller import logout_bp
 from .loan_calculator_controller import loan_calculator_bp
+from .used_car_controller import used_car_bp

@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <div class="navbar">
         <div>
             <a href="{{ url_for('index') }}">Home</a>
-            <a href="#">Car Listings</a>
+            <a href="{{ url_for('used_car.car_listing')}}">Car Listings</a>
             <a href="{{ url_for('loan_calculator.loan_calculator') }}">Loan Calculator</a>
         </div>
         {% if session.get('user_id') %}
@@ -19,7 +20,7 @@
                 <div class="dropdown-content">
                     <a href="{{ url_for('view_profile.view_profile') }}">Manage Profiles</a>
                     <a href="{{ url_for('view_account.view_account') }}">Manage Users</a>
-                    <a href="#">My Cars</a>
+                    <a href="{{ url_for('used_car')}}">My Cars</a>
                     <a href="{{ url_for('logout.logout') }}">Logout</a>
                 </div>
             </div>

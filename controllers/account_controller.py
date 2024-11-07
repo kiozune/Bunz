@@ -26,11 +26,11 @@ class CreateAccountController:
                 # Flash the error message to notify the users
                 flash(str(e), 'danger')
                 return render_template('account/create_account.html', roles=roles, username=username,
-                                       email=email, phone=phone)
+                                       email=email, phone=phone, title='Create New Account')
             except IntegrityError as e:
                 flash('Integrity error: ' + str(e.orig), 'danger')
 
-        return render_template('account/create_account.html', roles=roles)
+        return render_template('account/create_account.html', roles=roles, title='Create New Account')
 
 
 # View Account Controller
@@ -42,7 +42,7 @@ class ViewAccountController:
     def view_account():
         # Instance that get all the accounts stored in the database
         account = UserAccount.get_all_accounts()
-        return render_template('account/account_management.html', account=account)
+        return render_template('account/account_management.html', account=account, title='Account Management')
 
 
 # Update Account Controller
@@ -70,9 +70,10 @@ class UpdateAccountController:
             except ValueError as e:
                 flash(str(e), 'danger')
                 return render_template('account/update_account.html',account=account, roles=roles,
-                                       id=id, role=role_id, username=username, email=email, phone=phone)
+                                       id=id, role=role_id, username=username, email=email, phone=phone,
+                                       title='Update Account')
 
-        return render_template('account/update_account.html', account=account, roles=roles)
+        return render_template('account/update_account.html', account=account, roles=roles, title='Update Account')
 
 
 # Suspend Account Controller
@@ -86,7 +87,7 @@ class SuspendProfileController:
         try:
             suspend_account = UserAccount.suspend_account(id)
             flash(f"Profile {UserAccount.get_account_by_id(id).username} has been suspended successfully", 'success')
-            return render_template('account/account_management.html', account=account)
+            return render_template('account/account_management.html', account=account, title='Account Management')
         except ValueError as e:
             flash(str(e), 'danger')
 
@@ -101,8 +102,9 @@ class SearchProfileController:
         query = request.args.get('query').strip()
         account = UserAccount.get_all_accounts()
         if query == '':
-            return render_template('account/account_management.html', account=account)
+            return render_template('account/account_management.html', account=account, title='Account Management')
         elif query:
             results = UserAccount.search_account(query)
-            return render_template('account/account_management.html', account=results, query=query)
-        return render_template('account/account_management.html', account=account)
+            return render_template('account/account_management.html', account=results, query=query,
+                                   title='Account Management')
+        return render_template('account/account_management.html', account=account, title='Account Management')

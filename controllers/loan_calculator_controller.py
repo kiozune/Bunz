@@ -15,10 +15,10 @@ class LoanCalculatorController:
             try:
                 cal = Calculator(principal, interest_rate, years)
                 result = cal.calculate_loan(principal, interest_rate, years)
-                return render_template('loan_calculator.html', result=result)
+                return render_template('loan_calculator.html', result=result, title='Loan Calculator')
             except ValueError as e:
                 # Flash the error message to notify the users
                 flash(str(e), 'danger')
                 return render_template('loan_calculator.html', principal=principal,
-                                       interest_rate=interest_rate, years=years)
-        return render_template('loan_calculator.html')
+                                       interest_rate=interest_rate, years=years, title='Loan Calculator')
+        return render_template('loan_calculator.html', title='Loan Calculator')

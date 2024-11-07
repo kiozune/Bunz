@@ -1,0 +1,17 @@
+{% include 'header.html' %}
+
+    <h1>Search Results for "{{ search_query }}"</h1>
+
+    {% if car_listings %}
+        {% for listing in car_listings %}
+            <h2>{{ listing.brand }} {{ listing.model }}</h2>
+            <p>Price: ${{ listing.price }}</p>
+            <p><a href="{{ url_for('used_car.car_details', listing_id=listing.id) }}">View Details</a></p>
+        {% endfor %}
+    {% else %}
+        <p>No listings found for "{{ search_query }}"</p>
+    {% endif %}
+
+    <a href="{{ url_for('used_car.car_listing') }}">Back to All Listings
+
+{% include 'footer.html' %}

@@ -21,7 +21,7 @@ class CreateProfileController:
                 # Flash the error message to notify the users
                 flash(str(e), 'danger')
                 return render_template('profile/create_profile.html')
-        return render_template('profile/create_profile.html')
+        return render_template('profile/create_profile.html', title='Create New Profile')
 
 
 # View Profile Controller
@@ -33,7 +33,7 @@ class ViewProfileController:
     def view_profile():
         # Instance that get all the profile stored in the database
         profiles = UserProfile.get_all_profile()
-        return render_template('profile/profile_management.html', profiles=profiles)
+        return render_template('profile/profile_management.html', profiles=profiles, title='Profile Management')
 
 
 # Update profile details controller
@@ -56,9 +56,9 @@ class UpdateProfileController:
                 flash(f'Profile for role "{role}" updated successfully!', 'success')
             except ValueError as e:
                 flash(str(e), 'danger')
-                return render_template('profile/update_profile.html', id=id)
+                return render_template('profile/update_profile.html', id=id, title='Update Profile')
 
-        return render_template('profile/update_profile.html', profile=profile)
+        return render_template('profile/update_profile.html', profile=profile, title='Update Profile')
 
 
 # Suspend profile controller
@@ -72,7 +72,7 @@ class SuspendProfileController:
         try:
             suspend_profile = UserProfile.suspend_profile(id)
             flash(f"Profile {UserProfile.get_profile_by_id(id).role} has been suspended successfully", 'success')
-            return render_template('profile/profile_management.html', profiles=profiles)
+            return render_template('profile/profile_management.html', profiles=profiles, title='Profile Management')
         except ValueError as e:
             flash(str(e), 'danger')
 
@@ -87,8 +87,8 @@ class SearchProfileController:
         query = request.args.get('query', '').strip()
         profiles = UserProfile.get_all_profile()
         if query == '':
-            return render_template('profile/profile_management.html', profiles=profiles)
+            return render_template('profile/profile_management.html', profiles=profiles, title='Profile Management')
         elif query:
             results = UserProfile.search_profile(query)
-            return render_template('profile/profile_management.html', profiles=results, query=query)
-        return render_template('profile/profile_management.html', profiles=profiles)
+            return render_template('profile/profile_management.html', profiles=results, query=query, title='Profile Management')
+        return render_template('profile/profile_management.html', profiles=profiles, title='Profile Management')
