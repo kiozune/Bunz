@@ -1,6 +1,12 @@
-from . import db
+
 from sqlalchemy.exc import IntegrityError
 from datetime import datetime
+<<<<<<< Updated upstream
+=======
+from .account_model import UserAccount
+from .favorites import favorite_used_car
+from . import db
+>>>>>>> Stashed changes
 
 
 class UsedCarListing(db.Model):
@@ -12,7 +18,14 @@ class UsedCarListing(db.Model):
     year = db.Column(db.Integer, nullable=False)
     price = db.Column(db.Float, nullable=False)
     description = db.Column(db.Text, nullable=True)
+<<<<<<< Updated upstream
     seller_username = db.Column(db.String(50), nullable=False)
+=======
+    seller_id = db.Column(db.Integer, db.ForeignKey('user_account.id'), nullable=False)
+>>>>>>> Stashed changes
+
+    users = db.relationship('UserAccount', secondary='favorite_used_car',
+                            backref=db.backref('favorited_cars', lazy='dynamic'))
 
     @classmethod
     def create_listing(cls, brand, model, year, price, seller_username, description=''):
@@ -97,3 +110,6 @@ class UsedCarListing(db.Model):
             (UsedCarListing.brand.ilike(f"%{search_query}%")) |
             (UsedCarListing.model.ilike(f"%{search_query}%"))
         ).all()
+
+
+# Define the relationship to UserAccount

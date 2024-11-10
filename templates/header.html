@@ -14,6 +14,7 @@
             <a href="{{ url_for('used_car.add_car_listing') }}">Add Car Listing</a>
             <a href="#">Loan Calculator</a>
         </div>
+<<<<<<< Updated upstream
 
         <div class="dropdown">
             <a href="#" class="profile-icon"># <i class="fa fa-user-circle"></i></a>
@@ -22,6 +23,18 @@
                 <a href="#">Manage Users</a>
                <a href="#">My Cars</a>
                 <a href="#">Logout</a>
+=======
+        {% if session.get('user_id') %}
+            <div class="dropdown">
+                <a class="profile-icon">{{ username }} <i class="fa fa-user-circle"></i></a>
+                <div class="dropdown-content">
+                    <a href="{{ url_for('view_profile.view_profile') }}">Manage Profiles</a>
+                    <a href="{{ url_for('view_account.view_account') }}">Manage Users</a>
+                    <a href="{{ url_for('used_car.car_listing')}}">My Cars</a>
+              <a href="{{ url_for('favorites.view_favorites', user_id=session.get('user_id')) }}">Favorites</a>
+                    <a href="{{ url_for('logout.logout') }}">Logout</a>
+                </div>
+>>>>>>> Stashed changes
             </div>
         </div>
         <a href="#" id="signin-btn">Sign In</a>

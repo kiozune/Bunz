@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Favorite Cars</title>
+</head>
+<body>
+    <h1>Your Favorite Cars</h1>
+
+    {% if favorite_cars %}
+        <table width="100%">
+            <thead>
+                <tr>
+                    <th>Brand</th>
+                    <th>Model</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for car in favorite_cars %}
+                    <tr>
+                        <td><h2>{{ car.brand }}</h2></td>  <!-- Changed from make to brand -->
+                        <td><h2>{{ car.model }}</h2></td>
+                        <td><p>Price: ${{ car.price }}</p></td>
+                        <td>
+                            <!-- Update to point to car_details instead of view_car_listing -->
+                            <a href="{{ url_for('used_car.car_details', listing_id=car.id) }}">View Details</a>
+                            <form action="{{ url_for('favorites.remove_from_favorites') }}" method="POST" style="display:inline;">
+                                <input type="hidden" name="user_id" value="{{ user_id }}">
+                                <input type="hidden" name="car_id" value="{{ car.id }}">
+                                <button type="submit">Remove</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>You have no favorite cars yet.</p>
+    {% endif %}
+</body>
+</html>
