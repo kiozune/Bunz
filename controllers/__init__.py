@@ -4,3 +4,4 @@ from .login_controller import login_bp
 from .logout_controller import logout_bp
 from .loan_calculator_controller import loan_calculator_bp
 from .used_car_controller import used_car_bp, my_used_car_bp
+from .favorite_controller import favorites_bp

@@ -55,10 +55,13 @@ class AddCarController:
 class ViewCarController:
     @staticmethod
     @used_car_bp.route('/car_listing', methods=['GET'])
-    @login_required
     def car_listing():
+        user_id = session.get('user_id')
+        from models.favorites_model import Favorite
         listings = UsedCarListing.get_all_listings()
-        return render_template('car_listing/view_car_listing.html', car_listings=listings)
+        for listing in listings:
+            listing.is_favorited = Favorite.query.filter_by(user_id=user_id, listing_id=listing.id).first() is not None
+        return render_template('car_listing/view_car_listing.html', car_listings=listings, title='Car Listing')
 
 
 class MyCarController:
@@ -73,13 +76,10 @@ class MyCarController:
 
             if role_id == 3:
                 listings = UsedCarListing.query.filter_by(seller_id=user_id).all()
-                print(f"Role ID: {role_id}")
-                print(f'{user_id}')
-                print(listings)
-                return render_template('car_listing/my_car_listing.html', car_listings=listings)
+                return render_template('car_listing/my_car_listing.html', car_listings=listings, title='My Car Listing')
             elif role_id == 4:
                 listings = UsedCarListing.query.filter_by(agent_id=user_id).all()
-                return render_template('car_listing/my_car_listing.html', car_listings=listings)
+                return render_template('car_listing/my_car_listing.html', car_listings=listings, title='My Car Listing')
             else:
                 return render_template('permission_denied.html')
         except ValueError as ve:
@@ -94,7 +94,7 @@ class CarDetailsController:
         try:
             listing = UsedCarListing.get_listing_by_id(listing_id)
             view_count = UsedCarListing.add_view_count(listing_id)
-            return render_template('car_listing/car_details.html', listing=listing)
+            return render_template('car_listing/car_details.html', listing=listing, title='Car Details')
         except ValueError as ve:
             return jsonify({'error': str(ve)}), 404
 
@@ -123,7 +123,7 @@ class EditCarController:
             except ValueError as ve:
                 return jsonify({'error': str(ve)}), 400
 
-        return render_template('car_listing/edit_car_listing.html', listing=listing)
+        return render_template('car_listing/edit_car_listing.html', listing=listing, title='Edit Car Listing')
 
 class DeleteCarController:
     @staticmethod

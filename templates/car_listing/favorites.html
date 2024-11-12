@@ -1,0 +1,39 @@
+{% include 'header.html' %}
+    <h1>Your Favorite Cars</h1>
+
+    {% if favorite_cars %}
+        <table width="100%">
+            <thead>
+                <tr>
+                    <th>Brand</th>
+                    <th>Model</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for listing in favorite_cars %}
+                    <tr>
+                        <td><h2>{{ listing.brand }}</h2></td>  <!-- Changed from make to brand -->
+                        <td><h2>{{ listing.model }}</h2></td>
+                        <td><p>Price: ${{ listing.price }}</p></td>
+                        <td>
+                            <form action="{{ url_for('favorites.toggle_favorite') }}" method="POST">
+                                <input type="hidden" name="listing_id" value="{{ listing.id }}">
+                                <button type="submit" style="border: none; background: none;">
+                                    {% if listing.is_favorited %}
+                                        <span class='heart' style="color: red;"><i class="fa fa-heart" style="font-size:48px;color:red"></i></span>
+                                    {% else %}
+                                        <span class='heart2'><i class="fa fa-heart-o" style="font-size:48px;"></i></span>
+                                    {% endif %}
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>You have no favorite cars yet.</p>
+    {% endif %}
+{% include 'footer.html' %}

@@ -1,7 +1,5 @@
 {% include 'header.html' %}
     <h1>Available Car Listings</h1>
-
-    <!-- Search form -->
     <form method="get" action="{{ url_for('used_car.search_car_listings') }}">
         <input type="text" name="search" placeholder="Search by brand or model" value="{{ search_query|default('') }}">
         <button type="submit">Search</button>
@@ -12,16 +10,26 @@
             <th>Brand</th>
             <th>Model</th>
             <th>Price</th>
+            <th>Favorite</th>
         </tr>
         {% for listing in car_listings %}
-            <tr class="clickable-row" onclick="window.location.href='{{ url_for('used_car.car_details', listing_id=listing.id)}}'">
+            <tr class="clickable-row">
                 <td><h2>{{ listing.brand }}</h2></td>
                 <td><h2>{{ listing.model }}</h2></td>
                 <td><p>${{ listing.price }}</p></td>
+                <td>
+                    <form action="{{ url_for('favorites.toggle_favorite') }}" method="POST">
+                        <input type="hidden" name="listing_id" value="{{ listing.id }}">
+                        <button type="submit" style="border: none; background: none;">
+                            {% if listing.is_favorited %}
+                                <span class='heart' style="color: red;"><i class="fa fa-heart" style="font-size:48px;color:red"></i></span>
+                            {% else %}
+                                <span class='heart2'><i class="fa fa-heart-o" style="font-size:48px;"></i></span>
+                            {% endif %}
+                        </button>
+                    </form>
+                </td>
             </tr>
         {% endfor %}
     </table>
-
-
-
 {% include 'footer.html' %}

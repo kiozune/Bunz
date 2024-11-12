@@ -1,7 +1,6 @@
-from . import db
 from sqlalchemy.exc import IntegrityError
 from datetime import datetime
-from .account_model import UserAccount
+from . import db
 from flask import session
 
 
@@ -20,9 +19,16 @@ class UsedCarListing(db.Model):
     view_count = db.Column(db.Integer, default=0)
 
     seller = db.relationship('UserAccount', foreign_keys=[seller_id], backref='listings', lazy=True)
-
+    favorited_by_users = db.relationship(
+        'UserAccount', secondary='favorites',
+        primaryjoin="UsedCarListing.id == Favorite.listing_id",
+        secondaryjoin="UserAccount.id == Favorite.user_id",
+        backref=db.backref('favorite_listings', lazy='dynamic', overlaps="favorites"),
+        lazy='dynamic', overlaps="favorites"
+    )
     @classmethod
     def create_listing(cls, brand, model, year, price, seller_id, agent_id, description=''):
+        from models import UserAccount
         current_year = datetime.now().year
         seller = UserAccount.query.get(seller_id)
         if year > current_year:
@@ -121,4 +127,3 @@ class UsedCarListing(db.Model):
         except IntegrityError:
             db.session.rollback()
             raise ValueError("An error occurred while adding the view count.")
-

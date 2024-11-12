@@ -40,12 +40,13 @@ app.register_blueprint(loan_calculator_bp, url_prefix='/')
 # Used Car
 app.register_blueprint(used_car_bp, url_prefix='/')
 app.register_blueprint(my_used_car_bp, url_prefix='/')
+app.register_blueprint(favorites_bp, url_prefix='/')
 
 app.register_error_handler(404, page_not_found)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', title='Home')
 
 @app.route('/unauthorized_user')
 def unauthorized():

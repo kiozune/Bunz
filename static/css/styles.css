@@ -170,3 +170,13 @@ form.login-form{
     background: #EEF5FF;
     transform: scale(1.01);
 }
+
+/*Favorite*/
+.heart{
+    font-size: 30px;
+    cursor: pointer;
+}
+.heart2{
+    font-size: 40px;
+    cursor: pointer;
+}

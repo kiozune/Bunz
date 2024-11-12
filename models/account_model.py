@@ -1,6 +1,8 @@
 from sqlalchemy.exc import IntegrityError
 from werkzeug.security import generate_password_hash, check_password_hash
 from .profile_model import UserProfile
+from .favorites_model import Favorite
+from .used_car_model import UsedCarListing
 from . import db
 
 class UserAccount(db.Model):
@@ -15,6 +17,14 @@ class UserAccount(db.Model):
     is_suspended = db.Column(db.Boolean, default=False)
 
     role = db.relationship('UserProfile', backref='user_accounts')
+
+    favorited_listings = db.relationship(
+        'UsedCarListing', secondary='favorites',
+        primaryjoin="UserAccount.id == Favorite.user_id",
+        secondaryjoin="UsedCarListing.id == Favorite.listing_id",
+        backref=db.backref('users_who_favorited', lazy='dynamic', overlaps="favorites"),
+        lazy='dynamic', overlaps="favorites"
+    )
 
     # Hash password
     def set_password(self, password):
@@ -117,3 +127,15 @@ class UserAccount(db.Model):
              cls.phone_number.ilike(f'%{query}%')
         ).all()
         return results
+
+    # Method to add a car to the user's favorites
+    def add_to_favorites(self, car):
+        if car not in self.favorites:
+            self.favorites.append(car)
+            db.session.commit()
+
+    # Method to remove a car from favorites
+    def remove_from_favorites(self, car):
+        if car in self.favorites:
+            self.favorites.remove(car)
+            db.session.commit()

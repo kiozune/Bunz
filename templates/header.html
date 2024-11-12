@@ -7,6 +7,7 @@
     <!--CSS-->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!--script-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -30,6 +31,9 @@
                     {% endif %}
                     {% if session.get('role_id') == 3 or session.get('role_id')==4 %}
                         <a href="{{ url_for('my_used_car_listing.car_listing')}}">My Cars</a>
+                    {% endif %}
+                    {% if session.get('role_id') == 2 %}
+                        <a href="{{ url_for('favorites.view_favorites', user_id=session.get('user_id')) }}">Favorites</a>
                     {% endif %}
                     {% if session.get('role_id') == 4 %}
                         <a href="{{ url_for('used_car.add_car_listing')}}">Add Car Listing</a>
