@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Write a Review</title>
+</head>
+<body>
+    <h1>Write a Review</h1>
+
+    <!-- Display flash messages for success or error -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <form action="{{ url_for('review.submit_review') }}" method="POST">
+        <label for="agent_id">Select Agent:</label>
+        <select name="agent_id" id="agent_id">
+            {% for agent in agents %}
+                <option value="{{ agent.id }}">{{ agent.username }}</option>
+            {% endfor %}
+        </select><br>
+
+        <label for="rating">Rating (1-5):</label>
+        <input type="number" name="rating" id="rating" min="1" max="5" required><br>
+
+        <label for="comment">Comment:</label>
+        <textarea name="comment" id="comment" required></textarea><br>
+
+        <button type="submit">Submit Review</button>
+    </form>
+</body>
+</html>

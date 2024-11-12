@@ -5,19 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0349124b-cb20-4be9-a303-e4584d5e2fcc" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/controllers/favorite_controller.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/favorites.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/relationship.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/used_car_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/used_car_controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/account_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/account_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/used_car_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/used_car_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/car listing/car_details.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/car listing/car_details.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/car listing/favorites.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/car listing/favorites.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/header.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/review/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/review/add_reviews.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/review/app.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/review/header.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/review/model__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/review/review_controller.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/review/review_model.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/review/view_reviews.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,25 +42,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "Python.app.executor": "Run",
-    "Python.base.executor": "Run",
-    "Python.used_car_controller.executor": "Run",
-    "Python.used_car_model.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "John",
-    "last_opened_file_path": "C:/Users/john/Documents/GitHub/Bunz/controllers",
-    "settings.editor.selected.configurable": "com.intellij.pycharm.community.ide.impl.configuration.PythonContentEntriesConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Python.app.executor&quot;: &quot;Run&quot;,
+    &quot;Python.base.executor&quot;: &quot;Run&quot;,
+    &quot;Python.used_car_controller.executor&quot;: &quot;Run&quot;,
+    &quot;Python.used_car_model.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;John&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/john/Documents/GitHub/Bunz/controllers&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.intellij.pycharm.community.ide.impl.configuration.PythonContentEntriesConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\john\Documents\GitHub\Bunz\controllers" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\john\Documents\GitHub\Bunz\review" />
       <recent name="C:\Users\yeeha\OneDrive\Documents\GitHub\Bunz\templates\profile" />
       <recent name="C:\Users\yeeha\OneDrive\Documents\GitHub\Bunz\" />
     </key>

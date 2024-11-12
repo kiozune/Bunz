@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="navbar">
+        <div>
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('used_car.car_listing')}}">Car Listings</a>
+            <a href="{{ url_for('loan_calculator.loan_calculator') }}">Loan Calculator</a>
+            <a href="{{ url_for('review.write_review') }}">Write a Review</a>
+           {% if agent %}
+    <a href="{{ url_for('review.view_reviews', agent_id=agent.id) }}">View Reviews</a>
+{% else %}
+    <!-- No link is rendered here, effectively making it invisible -->
+{% endif %}
+
+
+
+        </div>
+        {% if session.get('user_id') %}
+            <div class="dropdown">
+                <a class="profile-icon">{{ username }} <i class="fa fa-user-circle"></i></a>
+                <div class="dropdown-content">
+                    <a href="{{ url_for('view_profile.view_profile') }}">Manage Profiles</a>
+                    <a href="{{ url_for('view_account.view_account') }}">Manage Users</a>
+                   <a href="{{ url_for('used_car.car_listing') }}">My Cars</a>
+                    <a href="{{ url_for('logout.logout') }}">Logout</a>
+                </div>
+            </div>
+        {% else %}
+            <a href="{{ url_for('login.login') }}" id="signin-btn">Sign In</a>
+        {% endif %}
+    </div>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviews for {{ agent.name }}</title>
+</head>
+<body>
+    <h1>Reviews for {{ agent.name }}</h1>
+
+    {% if reviews %}
+        <ul>
+            {% for review in reviews %}
+                <li>
+                    <strong>Rating:</strong> {{ review.rating }} / 5<br>
+                    <strong>Comment:</strong> {{ review.comment }}<br>
+                    <small>by {{ review.user.username }} on {{ review.date_created.strftime('%Y-%m-%d') }}</small>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No reviews yet for this agent.</p>
+    {% endif %}
+</body>
+</html>
