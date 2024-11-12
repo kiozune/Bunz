@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from models import UserProfile, UserAccount, db
+from models import db
 from config import Config
 from flask_migrate import Migrate
 from controllers import *
@@ -37,13 +37,19 @@ app.register_blueprint(logout_bp, url_prefix='/')
 # Loan Calculator
 app.register_blueprint(loan_calculator_bp, url_prefix='/')
 
+# Used Car
 app.register_blueprint(used_car_bp, url_prefix='/')
+app.register_blueprint(my_used_car_bp, url_prefix='/')
 
 app.register_error_handler(404, page_not_found)
 
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/unauthorized_user')
+def unauthorized():
+    return render_template('permission_denied.html')
 
 
 if __name__ == '__main__':

@@ -1,6 +1,5 @@
 {% include 'header.html' %}
 
-<div class="container">
     <h1>Profile Management</h1>
     <h2>Create New Account</h2>
     <button onclick="window.location.href='{{ url_for('create_account.create_account') }}'">Create Account</button>
@@ -23,7 +22,7 @@
       {% endif %}
     {% endwith %}
 
-    <table>
+    <table class="account_table">
         <tr>
             <th>Username</th>
             <th>Email</th>
@@ -69,6 +68,5 @@
             </tr>
         {% endif %}
     </table>
-</div>
 
 {% include 'footer.html' %}

@@ -1,5 +1,4 @@
 {% include 'header.html' %}
-    <div class="container">
         <h1>Create Profile</h1>
         <form action="{{ url_for('create_profile.create_profile') }}" method="POST" onsubmit="return validateForm()">
             <a>Profile:</a>
@@ -23,7 +22,6 @@
             </div>
           {% endif %}
         {% endwith %}
-    </div>
 {% include 'footer.html' %}
 
 <script src="{{ url_for('static', filename='js/validateform.js') }}"></script>

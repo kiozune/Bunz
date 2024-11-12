@@ -1,6 +1,4 @@
 {% include 'header.html' %}
-
-<body>
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
         <div id="flash-messages">
@@ -43,7 +41,6 @@
     </form>
 
     <a href="{{ url_for('view_account.view_account') }}">Back to Account Management</a>
-</body>
 
 {% include 'footer.html' %}
 <script src="{{ url_for('static', filename='js/accountformvalidation.js') }}"></script>

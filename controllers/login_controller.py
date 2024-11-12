@@ -16,7 +16,7 @@ class LoginController:
             if user and user.check_password(password):
                 session['user_id'] = user.id
                 session['username'] = user.username
-                flash(f"Welcome, {user.username}!", 'success')
+                session['role_id'] = user.role_id
                 return redirect(url_for('index'))
             else:
                 flash('Invalid username or password', 'danger')

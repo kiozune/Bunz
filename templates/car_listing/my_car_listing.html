@@ -7,19 +7,23 @@
         <button type="submit">Search</button>
     </form>
     <br>
-    <table width="100%">
+    <table class="my_car_table" width="100%">
         <tr>
             <th>Brand</th>
             <th>Model</th>
             <th>Price</th>
+            <th>View Count</th>
         </tr>
         {% for listing in car_listings %}
             <tr class="clickable-row" onclick="window.location.href='{{ url_for('used_car.car_details', listing_id=listing.id)}}'">
                 <td><h2>{{ listing.brand }}</h2></td>
                 <td><h2>{{ listing.model }}</h2></td>
                 <td><p>${{ listing.price }}</p></td>
+                <td><a>{{listing.view_count}}</a></td>
             </tr>
         {% endfor %}
+
+
     </table>
 
 

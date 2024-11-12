@@ -1,28 +1,41 @@
+/*Body*/
+body{
+    min-height: 100vh;
+}
+
+section.container{
+    min-height: 90vh;
+}
+
 /*Navigation bar styling*/
-.navbar {
+div.navbar {
     display: flex;
     justify-content: space-between;
     background-color: #333;
     padding: 10px;
 }
 
-.navbar a {
+div.navbar a {
     color: white;
     text-decoration: none;
     padding: 10px;
     font-size: 18px;
 }
+div.navbar a.profile-icon{
+    color: white;
+    text-decoration: none;
+}
 
-.navbar a:hover {
+div.navbar a:hover {
     background-color: #575757;
 }
 
-.dropdown {
+div.dropdown {
     position: relative;
     display: inline-block;
 }
 
-.dropdown-content {
+div.dropdown-content {
     display: none;
     position: absolute;
     right: 0;
@@ -31,7 +44,7 @@
     z-index: 1;
 }
 
-.dropdown-content a {
+div.dropdown-content a {
     color: white;
     padding: 12px 16px;
     text-decoration: none;
@@ -39,15 +52,16 @@
     font-size: 18px;
 }
 
-.dropdown-content a:hover {
+div.dropdown-content a.profile-icon:hover {
     background-color: #575757;
+    color: white;
 }
 
-.dropdown:hover .dropdown-content {
+div.dropdown:hover .dropdown-content {
     display: block;
 }
 
-.dropdown-content .profile-icon {
+div.dropdown-content .profile-icon {
     font-size: 20px;
     margin-right: 5px;
 }
@@ -87,4 +101,72 @@
 
 .alert-info{
     color : blue;
+    width: 100%;
+}
+
+/*table css*/
+table{
+    width : 100%;
+    border-collapse: collapse;
+    border: 1px solid;
+}
+
+tr th{
+    border: 1px solid;
+    background-color: #7AB2D3;
+    text-align: center;
+}
+
+
+tr:hover {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+    background-color: #DFF2EB;
+}
+
+tr:nth-child(odd) {
+    background-color: #7DFF2EB;
+}
+
+.profile_table td:nth-child(n+3){
+    text-align: center;
+}
+
+.account_table td:nth-child(n+4){
+    text-align: center;
+}
+
+.my_car_table td:nth-child(n+3){
+    text-align: center;
+}
+
+/*Login Page*/
+form.login-form{
+    width: 50%;
+    margin: 0 auto;
+    padding: 10px;
+    border-radius: 30px;
+    min-height: 50vh;
+    box-shadow: 5px 10px #888888;
+    margin-top: 10%;
+}
+
+.login-form h1{
+    text-align: center;
+}
+
+.login-form label{
+    font-weight: bold;
+}
+
+.clickable-row{
+    cursor: pointer;
+    transition: transform .2s;
+}
+
+.clickable-row:hover{
+    background: #EEF5FF;
+    transform: scale(1.01);
 }

@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, request
 from models import UserAccount, UserProfile
-from utils import login_required
+from utils import login_required, admin_only
 from sqlalchemy.exc import IntegrityError
 
 # Create Account Controller
@@ -9,6 +9,7 @@ class CreateAccountController:
     @staticmethod
     @create_account_bp.route('/create_account', methods=['GET', 'POST'])
     @login_required
+    @admin_only
     def create_account():
         roles = UserProfile.query.all()
         if request.method == 'POST':
@@ -39,6 +40,7 @@ class ViewAccountController:
     @staticmethod
     @view_account_bp.route('/view_account')
     @login_required
+    @admin_only
     def view_account():
         # Instance that get all the accounts stored in the database
         account = UserAccount.get_all_accounts()
@@ -51,6 +53,7 @@ class UpdateAccountController:
     @staticmethod
     @update_account_bp.route('/update_account/<int:id>', methods=['GET', 'POST'])
     @login_required
+    @admin_only
     def update_account(id):
         # Retrieve the existing profile by ID
         # Retrieve the existing profile by ID
@@ -82,6 +85,7 @@ class SuspendProfileController:
     @staticmethod
     @suspend_account_bp.route('/suspend_account/<int:id>', methods=['POST'])
     @login_required
+    @admin_only
     def suspend_account(id):
         account = UserAccount.get_all_accounts()
         try:
@@ -98,6 +102,7 @@ class SearchProfileController:
     @staticmethod
     @search_account_bp.route('/search_account', methods=['GET', 'POST'])
     @login_required
+    @admin_only
     def search_account():
         query = request.args.get('query').strip()
         account = UserAccount.get_all_accounts()

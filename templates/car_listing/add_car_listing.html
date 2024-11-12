@@ -18,7 +18,7 @@
                 <label for="seller_id">Seller Username:</label>
                 <select id="seller_id" name="seller_id" required>
                     {% for account in accounts %}
-                        {% if account.role_id == 2 %}
+                        {% if account.role_id == 3 %}
                             <option value="{{ account.id }}" {% if account.id == seller_id %}selected{% endif %}>
                                 {{ account.username }}
                             </option>

@@ -2,6 +2,7 @@ from . import db
 from sqlalchemy.exc import IntegrityError
 from datetime import datetime
 from .account_model import UserAccount
+from flask import session
 
 
 class UsedCarListing(db.Model):
@@ -15,9 +16,13 @@ class UsedCarListing(db.Model):
     description = db.Column(db.Text, nullable=True)
     seller_username = db.Column(db.String(50), nullable=False)
     seller_id = db.Column(db.Integer, db.ForeignKey('user_account.id'), nullable=False)
+    agent_id = db.Column(db.Integer, db.ForeignKey('user_account.id'), nullable=False)
+    view_count = db.Column(db.Integer, default=0)
+
+    seller = db.relationship('UserAccount', foreign_keys=[seller_id], backref='listings', lazy=True)
 
     @classmethod
-    def create_listing(cls, brand, model, year, price, seller_id, description=''):
+    def create_listing(cls, brand, model, year, price, seller_id, agent_id, description=''):
         current_year = datetime.now().year
         seller = UserAccount.query.get(seller_id)
         if year > current_year:
@@ -32,6 +37,7 @@ class UsedCarListing(db.Model):
             price=price,
             seller_username=seller.username,
             seller_id=seller_id,
+            agent_id=agent_id,
             description=description
         )
 
@@ -101,3 +107,18 @@ class UsedCarListing(db.Model):
             (UsedCarListing.brand.ilike(f"%{search_query}%")) |
             (UsedCarListing.model.ilike(f"%{search_query}%"))
         ).all()
+
+    @classmethod
+    def add_view_count(cls, listing_id):
+        listing = cls.get_listing_by_id(listing_id)
+
+        if 'viewed_car' not in session:
+            session['viewed_cars'] = []
+        try:
+            if listing.id not in session['viewed_cars']:
+                listing.view_count += 1
+                db.session.commit()
+        except IntegrityError:
+            db.session.rollback()
+            raise ValueError("An error occurred while adding the view count.")
+

@@ -1,8 +1,6 @@
 
 
 {% include 'header.html' %}
-
-<body>
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
         <div id="flash-messages">
@@ -30,7 +28,6 @@
     </form>
 
     <a href="{{ url_for('view_profile.view_profile') }}">Back to User Management</a>
-</body>
 
 {% include 'footer.html' %}
 <script src="{{ url_for('static', filename='js/validateform.js') }}"></script>

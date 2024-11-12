@@ -1,6 +1,4 @@
 {% include 'header.html' %}
-
-<div class="container">
     <h1>Profile Management</h1>
     <h2>Create New Profile</h2>
     <button onclick="window.location.href='{{ url_for('create_profile.create_profile') }}'">Create Profile</button>
@@ -12,6 +10,7 @@
         <input type="submit" value="Search">
         <a href="{{ url_for('view_profile.view_profile') }}">Clear</a>
     </form>
+    <br>
 
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
@@ -23,7 +22,7 @@
       {% endif %}
     {% endwith %}
 
-    <table>
+    <table class="profile_table">
         <tr>
             <th>Role</th>
             <th>Description</th>
@@ -68,6 +67,4 @@
             </tr>
         {% endif %}
     </table>
-</div>
-
 {% include 'footer.html' %}
