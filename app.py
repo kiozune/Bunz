@@ -24,11 +24,7 @@ app.register_blueprint(suspend_profile_bp, url_prefix='/')
 app.register_blueprint(search_profile_bp, url_prefix='/')
 
 # User Account
-app.register_blueprint(create_account_bp, url_prefix='/')
-app.register_blueprint(view_account_bp, url_prefix='/')
-app.register_blueprint(update_account_bp, url_prefix='/')
-app.register_blueprint(suspend_account_bp, url_prefix='/')
-app.register_blueprint(search_account_bp, url_prefix='/')
+app.register_blueprint(account_bp, url_prefix='/')
 
 # login
 app.register_blueprint(login_bp, url_prefix='/')
@@ -42,6 +38,9 @@ app.register_blueprint(used_car_bp, url_prefix='/')
 app.register_blueprint(my_used_car_bp, url_prefix='/')
 app.register_blueprint(favorites_bp, url_prefix='/')
 
+# review
+app.register_blueprint(review_bp, url_prefix='/')
+
 app.register_error_handler(404, page_not_found)
 
 @app.route('/')
@@ -50,7 +49,7 @@ def index():
 
 @app.route('/unauthorized_user')
 def unauthorized():
-    return render_template('permission_denied.html')
+    return render_template('error/permission_denied.html')
 
 
 if __name__ == '__main__':

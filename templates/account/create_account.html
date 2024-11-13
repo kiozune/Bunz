@@ -15,7 +15,7 @@
               {% endif %}
             {% endwith %}
 
-        <form action="{{ url_for('create_account.create_account') }}" method="POST" onsubmit="return validateForm()">
+        <form action="{{ url_for('account.create_account') }}" method="POST" onsubmit="return validateForm()">
             <label for="username">Username:</label><br>
             <input type="text" id="username" name="username"/>*
             <span id="username_error"></span><br>
@@ -42,11 +42,11 @@
             <br>
             <input type="submit" value="Create Account"/>
         </form>
-        <a href="{{ url_for('view_account.view_account') }}">Back to Account Management</a>
+        <a href="{{ url_for('account.view_account') }}">Back to Account Management</a>
 {% include 'footer.html' %}
 
 <script src="{{ url_for('static', filename='js/accountformvalidation.js') }}"></script>
 <script>
-    const redirectPageURL = "{{ url_for('view_account.view_account') }}";
+    const redirectPageURL = "{{ url_for('account.view_account') }}";
 </script>
 <script src="{{ url_for('static', filename='js/countdown_timer.js') }}"></script>

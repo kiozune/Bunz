@@ -81,7 +81,7 @@ class MyCarController:
                 listings = UsedCarListing.query.filter_by(agent_id=user_id).all()
                 return render_template('car_listing/my_car_listing.html', car_listings=listings, title='My Car Listing')
             else:
-                return render_template('permission_denied.html')
+                return render_template('error/permission_denied.html')
         except ValueError as ve:
             return jsonify({'error': str(ve)}), 400
         except Exception as e:
@@ -89,7 +89,6 @@ class MyCarController:
 
 class CarDetailsController:
     @used_car_bp.route('/car_details/<int:listing_id>', methods=['GET'])
-    @login_required
     def car_details(listing_id):
         try:
             listing = UsedCarListing.get_listing_by_id(listing_id)

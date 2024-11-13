@@ -180,3 +180,55 @@ form.login-form{
     font-size: 40px;
     cursor: pointer;
 }
+
+.favorite_button{
+    width: 100%;
+    outline: none;
+    border: none;
+    background: none;
+}
+
+/*Listing*/
+.back-button{
+    cursor:pointer;
+    color: #007bff;
+}
+
+.back-button:hover{
+    text-decoration: underline;
+    color: #0056b3;
+}
+
+.agent-box {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-top: 10px;
+    background-color: #f9f9f9;
+    width: fit-content;
+    font-size: 14px;
+}
+
+.review_table tr:nth-child(n+1) td:nth-child(1){
+    text-align:center;
+}
+
+.listing-details{
+    min-height: 60vh;
+}
+
+.create-button{
+    clear:both;
+    cursor: pointer;
+    padding: 5px;
+    display: inline-block;
+    width: 10%;
+    text-align: center;
+    font-weight: bold;
+    border: 1px solid black;
+    transition: transform .2s;
+}
+
+.create-button:hover{
+    background-color: #DFF2EB;
+    transform: scale(1.05)
+}

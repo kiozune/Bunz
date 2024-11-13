@@ -1,0 +1,36 @@
+{% include 'header.html' %}
+    <br><br>
+
+    <a href="{{ url_for('used_car.car_listing') }}">Back to Listings</a>
+
+    <br><br>
+
+    <h1>{{ agent.username }}</h1>
+    <p>Email: <a href="mailto:{{ agent.email }}">{{ agent.email }}</a></p>
+    <p>Phone: {{ agent.phone_number }}</p>
+
+    <a href="{{ url_for('review.write_review', agent_id=agent.id) }}">
+        <button type="button">Write a Review</button>
+    </a>
+    <br><br>
+
+    <h2>Reviews</h2>
+    <table class="review_table">
+        <tr>
+            <th style="width: 30%">Ratings</th>
+            <th style="width: 70%">Comment</th>
+        </tr>
+        {% if reviews %}
+            {% for review in reviews %}
+            <tr>
+                <td>{{ review.rating }} / 5 <br></td>
+                <td>{{ review.comment }} <br></td>
+            </tr>
+            {% endfor %}
+        {% else %}
+            <p>No reviews for this agent yet.</p>
+        {% endif %}
+        </tr>
+    </table>
+
+{% include 'footer.html' %}

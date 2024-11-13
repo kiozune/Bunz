@@ -78,7 +78,5 @@ class UserProfile(db.Model):
         ).all()
         return result
 
-
-
     def __repr__(self):
         return f'<UserProfile {self.role}>'

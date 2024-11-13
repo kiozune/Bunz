@@ -1,27 +1,28 @@
 {% include 'header.html' %}
 
     <h1>Search Results for "{{ search_query }}"</h1>
-
-       {% if car_listings %}
        <table width="100%">
             <tr>
                 <th>Brand</th>
                 <th>Model</th>
                 <th>Price</th>
             </tr>
-            {% for listing in car_listings %}
-                <tr class="clickable-row" onclick="window.location.href='{{ url_for('used_car.car_details', listing_id=listing.id)}}'">
-                    <td><h2>{{ listing.brand }}</h2></td>
-                    <td><h2>{{ listing.model }}</h2></td>
-                    <td><p>${{ listing.price }}</p></td>
-                </tr>
-            {% endfor %}
-              </table>
-        {% else %}
-            <p>No listings found for "{{ search_query }}"</p>
-        {% endif %}
+           {% if car_listings %}
+                {% for listing in car_listings %}
+                    <tr class="clickable-row" onclick="window.location.href='{{ url_for('used_car.car_details', listing_id=listing.id)}}'">
+                        <td><h2>{{ listing.brand }}</h2></td>
+                        <td><h2>{{ listing.model }}</h2></td>
+                        <td><p>${{ listing.price }}</p></td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+            <tr>
+                <td colspan="100%">No listings found for "{{ search_query }}"</td>
+            </tr>
+            {% endif %}
+        </table>
 
 
-    <a href="{{ url_for('used_car.car_listing') }}">Back to All Listings
+    <a href="{{ url_for('my_used_car_listing.car_listing') }}">Back to All Listings
 
 {% include 'footer.html' %}

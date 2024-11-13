@@ -1,5 +1,24 @@
 {% include 'header.html' %}
     <h1>Your Favorite Cars</h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div id="flash-messages">
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <form method="GET" action="{{ url_for('favorites.search_favorites', user_id=user_id) }}" class="search-form">
+        <input type="text" name="query" placeholder="Search your favorites by brand or model" value="{{ search_query or '' }}">
+        <button type="submit">Search</button>
+        <a href="{{ url_for('favorites.view_favorites', user_id=user_id) }}" title="Reset search" style="margin-left: 10px;">
+        clear
+        </a>
+    </form>
+
+    <br>
 
     {% if favorite_cars %}
         <table width="100%">
@@ -11,16 +30,17 @@
                     <th>Action</th>
                 </tr>
             </thead>
+
             <tbody>
                 {% for listing in favorite_cars %}
-                    <tr>
-                        <td><h2>{{ listing.brand }}</h2></td>  <!-- Changed from make to brand -->
+                    <tr onclick="window.location.href='{{ url_for('used_car.car_details', listing_id=listing.id)}}'">
+                        <td><h2>{{ listing.brand }}</h2></td>
                         <td><h2>{{ listing.model }}</h2></td>
                         <td><p>Price: ${{ listing.price }}</p></td>
                         <td>
                             <form action="{{ url_for('favorites.toggle_favorite') }}" method="POST">
                                 <input type="hidden" name="listing_id" value="{{ listing.id }}">
-                                <button type="submit" style="border: none; background: none;">
+                                <button class="favorite_button" type="submit">
                                     {% if listing.is_favorited %}
                                         <span class='heart' style="color: red;"><i class="fa fa-heart" style="font-size:48px;color:red"></i></span>
                                     {% else %}
@@ -34,6 +54,6 @@
             </tbody>
         </table>
     {% else %}
-        <p>You have no favorite cars yet.</p>
+        <p>No favorite listing found.</p>
     {% endif %}
 {% include 'footer.html' %}

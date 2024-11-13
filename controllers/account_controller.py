@@ -1,13 +1,13 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, request
-from models import UserAccount, UserProfile
+from models import UserAccount, UserProfile, Review
 from utils import login_required, admin_only
 from sqlalchemy.exc import IntegrityError
 
 # Create Account Controller
-create_account_bp = Blueprint('create_account', __name__)
+account_bp = Blueprint('account', __name__)
 class CreateAccountController:
     @staticmethod
-    @create_account_bp.route('/create_account', methods=['GET', 'POST'])
+    @account_bp.route('/create_account', methods=['GET', 'POST'])
     @login_required
     @admin_only
     def create_account():
@@ -35,10 +35,9 @@ class CreateAccountController:
 
 
 # View Account Controller
-view_account_bp = Blueprint('view_account', __name__)
 class ViewAccountController:
     @staticmethod
-    @view_account_bp.route('/view_account')
+    @account_bp.route('/view_account')
     @login_required
     @admin_only
     def view_account():
@@ -48,15 +47,12 @@ class ViewAccountController:
 
 
 # Update Account Controller
-update_account_bp = Blueprint('update_account', __name__)
 class UpdateAccountController:
     @staticmethod
-    @update_account_bp.route('/update_account/<int:id>', methods=['GET', 'POST'])
+    @account_bp.route('/update_account/<int:id>', methods=['GET', 'POST'])
     @login_required
     @admin_only
     def update_account(id):
-        # Retrieve the existing profile by ID
-        # Retrieve the existing profile by ID
         account = UserAccount.get_account_by_id(id)
         roles = UserProfile.query.all()
         if request.method == 'POST':
@@ -80,10 +76,9 @@ class UpdateAccountController:
 
 
 # Suspend Account Controller
-suspend_account_bp = Blueprint('suspend_account', __name__)
 class SuspendProfileController:
     @staticmethod
-    @suspend_account_bp.route('/suspend_account/<int:id>', methods=['POST'])
+    @account_bp.route('/suspend_account/<int:id>', methods=['POST'])
     @login_required
     @admin_only
     def suspend_account(id):
@@ -97,10 +92,9 @@ class SuspendProfileController:
 
 
 # Search Account Controller
-search_account_bp = Blueprint('search_account', __name__)
 class SearchProfileController:
     @staticmethod
-    @search_account_bp.route('/search_account', methods=['GET', 'POST'])
+    @account_bp.route('/search_account', methods=['GET', 'POST'])
     @login_required
     @admin_only
     def search_account():
@@ -113,3 +107,14 @@ class SearchProfileController:
             return render_template('account/account_management.html', account=results, query=query,
                                    title='Account Management')
         return render_template('account/account_management.html', account=account, title='Account Management')
+
+
+# View Agent Detail Controller
+class AgentDetailController:
+    @staticmethod
+    @account_bp.route('/agent/<int:agent_id>', methods=['GET', 'POST'])
+    def view_agent(agent_id):
+        agent = UserAccount.query.get_or_404(agent_id)
+        reviews = Review.query.filter_by(agent_id=agent_id).all()
+        return render_template('account/agent_detail.html', agent=agent, reviews=reviews)
+

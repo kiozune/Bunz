@@ -22,8 +22,8 @@ class UserAccount(db.Model):
         'UsedCarListing', secondary='favorites',
         primaryjoin="UserAccount.id == Favorite.user_id",
         secondaryjoin="UsedCarListing.id == Favorite.listing_id",
-        backref=db.backref('users_who_favorited', lazy='dynamic', overlaps="favorites"),
-        lazy='dynamic', overlaps="favorites"
+        backref=db.backref('users_who_favorited', lazy='dynamic', overlaps="favorite_entries,favorite_records"),
+        lazy='dynamic', overlaps="favorite_entries,favorite_records"
     )
 
     # Hash password
@@ -127,15 +127,3 @@ class UserAccount(db.Model):
              cls.phone_number.ilike(f'%{query}%')
         ).all()
         return results
-
-    # Method to add a car to the user's favorites
-    def add_to_favorites(self, car):
-        if car not in self.favorites:
-            self.favorites.append(car)
-            db.session.commit()
-
-    # Method to remove a car from favorites
-    def remove_from_favorites(self, car):
-        if car in self.favorites:
-            self.favorites.remove(car)
-            db.session.commit()

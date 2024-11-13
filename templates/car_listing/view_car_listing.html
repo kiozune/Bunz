@@ -5,6 +5,15 @@
         <button type="submit">Search</button>
     </form>
     <br>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div id="flash-messages">
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
     <table width="100%">
         <tr>
             <th>Brand</th>
@@ -13,14 +22,14 @@
             <th>Favorite</th>
         </tr>
         {% for listing in car_listings %}
-            <tr class="clickable-row">
+            <tr class="clickable-row" onclick="window.location.href='{{ url_for('used_car.car_details', listing_id=listing.id)}}'">
                 <td><h2>{{ listing.brand }}</h2></td>
                 <td><h2>{{ listing.model }}</h2></td>
                 <td><p>${{ listing.price }}</p></td>
                 <td>
                     <form action="{{ url_for('favorites.toggle_favorite') }}" method="POST">
                         <input type="hidden" name="listing_id" value="{{ listing.id }}">
-                        <button type="submit" style="border: none; background: none;">
+                        <button class="favorite_button" type="submit">
                             {% if listing.is_favorited %}
                                 <span class='heart' style="color: red;"><i class="fa fa-heart" style="font-size:48px;color:red"></i></span>
                             {% else %}

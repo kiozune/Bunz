@@ -15,7 +15,7 @@
     {% endwith %}
     <h1>Update Profile: {{ account.username }}</h1>
     <form method="POST">
-        <form action="{{ url_for('update_account.update_account', id=account.id) }}" method="POST" onsubmit="return validateForm()">
+        <form action="{{ url_for('account.update_account', id=account.id) }}" method="POST" onsubmit="return validateForm()">
             <label for="username">Username:</label><br>
             <input type="text" id="username" name="username" value="{{ account.username }}" readonly/>*
             <span id="username_error"></span><br>
@@ -40,11 +40,11 @@
         </form>
     </form>
 
-    <a href="{{ url_for('view_account.view_account') }}">Back to Account Management</a>
+    <a href="{{ url_for('account.view_account') }}">Back to Account Management</a>
 
 {% include 'footer.html' %}
 <script src="{{ url_for('static', filename='js/accountformvalidation.js') }}"></script>
 <script>
-    const redirectPageURL = "{{ url_for('view_account.view_account') }}";
+    const redirectPageURL = "{{ url_for('account.view_account') }}";
 </script>
 <script src="{{ url_for('static', filename='js/countdown_timer.js') }}"></script>

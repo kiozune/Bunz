@@ -8,4 +8,5 @@ from .profile_model import UserProfile
 from .calculator_model import Calculator
 from .used_car_model import UsedCarListing
 from .favorites_model import Favorite
+from .review_model import  Review
 

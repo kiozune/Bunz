@@ -1,0 +1,22 @@
+{% include 'header.html' %}
+
+    <h2>Reviews</h2>
+    <table>
+        <tr>
+            <th style="width: 30%">Ratings</th>
+            <th style="width: 70%">Comment</th>
+        </tr>
+        {% if reviews %}
+            {% for review in reviews %}
+            <tr>
+                <td>{{ review.rating }} / 5 <br></td>
+                <td>{{ review.comment }} <br></td>
+            </tr>
+            {% endfor %}
+        {% else %}
+            <p>No reviews for this agent yet.</p>
+        {% endif %}
+        </tr>
+    </table>
+
+{% include 'footer.html' %}

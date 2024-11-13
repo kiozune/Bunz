@@ -1,11 +1,14 @@
 {% include 'header.html' %}
-    <h1>Available Car Listings</h1>
-
-    <!-- Search form -->
+    <h1>My Car Listings</h1>
+    <br>
     <form method="get" action="{{ url_for('used_car.search_car_listings') }}">
+        <a class='create-button' onclick="window.location.href='{{ url_for('used_car.add_car_listing')}}'">New listing</a>
+        <span style="float: right;">
         <input type="text" name="search" placeholder="Search by brand or model" value="{{ search_query|default('') }}">
         <button type="submit">Search</button>
+        </span>
     </form>
+
     <br>
     <table class="my_car_table" width="100%">
         <tr>
@@ -13,6 +16,7 @@
             <th>Model</th>
             <th>Price</th>
             <th>View Count</th>
+            <th>Shortlisted Count</th>
         </tr>
         {% for listing in car_listings %}
             <tr class="clickable-row" onclick="window.location.href='{{ url_for('used_car.car_details', listing_id=listing.id)}}'">
@@ -20,6 +24,7 @@
                 <td><h2>{{ listing.model }}</h2></td>
                 <td><p>${{ listing.price }}</p></td>
                 <td><a>{{listing.view_count}}</a></td>
+                <td><a>{{listing.shortlisted_count}}</a></td>
             </tr>
         {% endfor %}
 

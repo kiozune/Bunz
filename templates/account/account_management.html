@@ -2,14 +2,14 @@
 
     <h1>Profile Management</h1>
     <h2>Create New Account</h2>
-    <button onclick="window.location.href='{{ url_for('create_account.create_account') }}'">Create Account</button>
+    <button onclick="window.location.href='{{ url_for('account.create_account') }}'">Create Account</button>
     <hr>    
     <h2>Existing Accounts</h2>
-        <form action="{{ url_for('search_account.search_account') }}" method="GET">
+    <form action="{{ url_for('account.search_account') }}" method="GET">
         <label for="query">Search Account:</label>
         <input type="text" name="query" placeholder="Search Account" value="{{ request.args.get('query', '') }}">
         <input type="submit" value="Search">
-        <a href="{{ url_for('view_account.view_account') }}">Clear</a>
+        <a href="{{ url_for('account.view_account') }}">Clear</a>
     </form>
 
     {% with messages = get_flashed_messages(with_categories=true) %}
@@ -46,7 +46,7 @@
                         <td style="color: green;">Active</td>
                     {% endif %}
                     <td>
-                        <button onclick="window.location.href='{{ url_for('update_account.update_account', id=account.id) }}'">Update</button>
+                        <button onclick="window.location.href='{{ url_for('account.update_account', id=account.id) }}'">Update</button>
                     </td>
                     {% if account.is_suspended %}
                         <td>
@@ -54,7 +54,7 @@
                         </td>
                     {% else %}
                         <td>
-                            <form action="{{ url_for('suspend_account.suspend_account', id=account.id) }}" method="POST" style="display:inline;">
+                            <form action="{{ url_for('account.suspend_account', id=account.id) }}" method="POST" style="display:inline;">
                                 <button type="submit">Suspend</button>
                             </form>
                         </td>

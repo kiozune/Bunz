@@ -27,15 +27,14 @@
                 <div class="dropdown-content">
                     {% if session.get('role_id') == 1 %}
                         <a  style="display: block;" href="{{ url_for('view_profile.view_profile') }}">Manage Profiles</a>
-                        <a href="{{ url_for('view_account.view_account') }}">Manage Users</a>
+                        <a href="{{ url_for('account.view_account') }}">Manage Users</a>
                     {% endif %}
                     {% if session.get('role_id') == 3 or session.get('role_id')==4 %}
                         <a href="{{ url_for('my_used_car_listing.car_listing')}}">My Cars</a>
                     {% endif %}
-                    {% if session.get('role_id') == 2 %}
-                        <a href="{{ url_for('favorites.view_favorites', user_id=session.get('user_id')) }}">Favorites</a>
-                    {% endif %}
+                    <a href="{{ url_for('favorites.view_favorites', user_id=session.get('user_id')) }}">Favorites</a>
                     {% if session.get('role_id') == 4 %}
+                        <a href="{{ url_for('review.view_reviews', agent_id=session.get('user_id')) }}">My Reviews</a>
                         <a href="{{ url_for('used_car.add_car_listing')}}">Add Car Listing</a>
                     {% endif %}
                     <a href="{{ url_for('logout.logout') }}">Logout</a>
