@@ -4,7 +4,7 @@ from utils import login_required, agent_only
 
 review_bp = Blueprint('review', __name__)
 
-class ReviewController:
+class CreateReviewController:
     # Route to display the form to write a review
     @review_bp.route('/write_review/<int:agent_id>')
     @login_required
@@ -28,6 +28,7 @@ class ReviewController:
 
         return redirect(url_for('account.view_agent', agent_id=agent_id))
 
+class ViewReviewController:
     # Agent to see review
     @review_bp.route('/view_reviews/<int:agent_id>', methods=['GET'])
     @login_required

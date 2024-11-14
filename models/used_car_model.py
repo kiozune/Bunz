@@ -55,7 +55,6 @@ class UsedCarListing(db.Model):
         db.session.add(new_listing)
         try:
             db.session.commit()
-            return new_listing  # Return the created listing for further reference if needed
         except IntegrityError:
             db.session.rollback()
             raise ValueError("An error occurred while saving the car listing. It might be a duplicate.")
