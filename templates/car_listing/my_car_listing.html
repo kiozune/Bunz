@@ -4,8 +4,8 @@
     <form method="get" action="{{ url_for('used_car.search_car_listings') }}">
         <a class='create-button' onclick="window.location.href='{{ url_for('used_car.add_car_listing')}}'">New listing</a>
         <span style="float: right;">
-        <input type="text" name="search" placeholder="Search by brand or model" value="{{ search_query|default('') }}">
-        <button type="submit">Search</button>
+            <input type="text" name="search" placeholder="Search by brand or model" value="{{ search_query|default('') }}">
+            <button type="submit">Search</button>
         </span>
     </form>
 

@@ -13,14 +13,20 @@ class LoginController:
 
             user = UserAccount.query.filter_by(username=username).first()
 
-            if user and user.check_password(password):
-                session['user_id'] = user.id
-                session['username'] = user.username
-                session['role_id'] = user.role_id
-                return redirect(url_for('index'))
-            else:
-                flash('Invalid username or password', 'danger')
-                return render_template('login.html', title='Login Page')
+            if user:
+                if user.is_suspended:
+                    flash('Your account has been suspended. Please call the customer support for help'
+                          , 'warning')
+                    return render_template('login.html', title='Login Page')
+
+                if user.check_password(password):
+                    session['user_id'] = user.id
+                    session['username'] = user.username
+                    session['role_id'] = user.role_id
+                    return redirect(url_for('index'))
+                else:
+                    flash('Invalid username or password', 'danger')
+                    return render_template('login.html', title='Login Page')
 
         return render_template('login.html', title='Login Page')
 

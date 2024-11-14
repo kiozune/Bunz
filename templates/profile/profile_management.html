@@ -1,16 +1,17 @@
 {% include 'header.html' %}
     <h1>Profile Management</h1>
-    <h2>Create New Profile</h2>
-    <button onclick="window.location.href='{{ url_for('create_profile.create_profile') }}'">Create Profile</button>
-    <hr>    
-    <h2>Existing Profile</h2>
+    <br><br>
     <form action="{{ url_for('search_profile.search_profile') }}" method="GET">
-        <label for="query">Search Profile:</label>
-        <input type="text" name="query" placeholder="Search Profile" value="{{ request.args.get('query', '') }}">
-        <input type="submit" value="Search">
-        <a href="{{ url_for('view_profile.view_profile') }}">Clear</a>
+        <a class='create-button profile-button' onclick="window.location.href='{{ url_for('create_profile.create_profile') }}'">
+            Create Profile
+        </a>
+        <span style="float: right;">
+            <input type="text" id="query" name="query" placeholder="Search Profile" value="{{ request.args.get('query', '') }}">
+            <input type="submit" value="Search">
+            <a href="{{ url_for('view_profile.view_profile') }}">Clear</a>
+        </span>
     </form>
-    <br>
+    <br><br>
 
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}

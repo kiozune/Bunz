@@ -228,6 +228,10 @@ form.login-form{
     transition: transform .2s;
 }
 
+.create-button.profile-button, .create-button.account-button{
+    width: 15%;
+}
+
 .create-button:hover{
     background-color: #DFF2EB;
     transform: scale(1.05)

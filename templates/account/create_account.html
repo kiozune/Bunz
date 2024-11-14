@@ -1,48 +1,51 @@
 {% include 'header.html' %}
-        <h1>Create Account</h1>
-            {% with messages = get_flashed_messages(with_categories=true) %}
-              {% if messages %}
-                <div id="flash-messages">
-                  {% for category, message in messages %}
-                    <div id="alert" class="alert alert-{{ category }}">{{ message }}</div>
-                    {% if category == 'success' %}
-                        <span id="redirect_message">
-                            Redirecting in <span id="countdown_timer">3</span> seconds...
-                        </span>
-                    {% endif %}
-                  {% endfor %}
-                </div>
-              {% endif %}
-            {% endwith %}
+    <br><br>
+    <a href="{{ url_for('account.view_account') }}">Back to Account Management</a>
+    <br><br>
+    <h1>Create Account</h1>
+    <br>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div id="flash-messages">
+          {% for category, message in messages %}
+            <div id="alert" class="alert alert-{{ category }}">{{ message }}</div>
+            {% if category == 'success' %}
+                <span id="redirect_message">
+                    Redirecting in <span id="countdown_timer">3</span> seconds...
+                </span>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
 
-        <form action="{{ url_for('account.create_account') }}" method="POST" onsubmit="return validateForm()">
-            <label for="username">Username:</label><br>
-            <input type="text" id="username" name="username"/>*
-            <span id="username_error"></span><br>
+    <form action="{{ url_for('account.create_account') }}" method="POST" onsubmit="return validateForm()">
+        <label for="username">Username:</label><br>
+        <input type="text" id="username" name="username"/>*
+        <span id="username_error"></span><br>
 
-            <br><label for="password">Password:</label><br>
-            <input type="text" id="password" name="password"/>*
-            <span id="password_error"></span><br>
+        <br><label for="password">Password:</label><br>
+        <input type="text" id="password" name="password"/>*
+        <span id="password_error"></span><br>
 
-            <br><label for="role_id">Role:</label><br>
-            <select id="role_id" name="role_id">
-                {% for role in roles %}
-                    <option value="{{ role.id }}" {% if role.id == role_id %}selected{% endif %}>{{ role.role }}</option>
-                {% endfor %}
-            </select>*
-            <span id="role_error"></span><br>
+        <br><label for="role_id">Role:</label><br>
+        <select id="role_id" name="role_id">
+            {% for role in roles %}
+                <option value="{{ role.id }}" {% if role.id == role_id %}selected{% endif %}>{{ role.role }}</option>
+            {% endfor %}
+        </select>*
+        <span id="role_error"></span><br>
 
-            <br><label for="email">Email:</label><br>
-            <input type="text" id="email" name="email" value="{{ email if email is not none else '' }}"/>*
-            <span id="email_error"></span><br>
+        <br><label for="email">Email:</label><br>
+        <input type="text" id="email" name="email" value="{{ email if email is not none else '' }}"/>*
+        <span id="email_error"></span><br>
 
-            <br><label for="phone">Phone Number:</label><br>
-            <input type="text" id="phone" name="phone" value="{{ phone if phone is not none else '' }}"/>*
-            <span id="phone_error"></span><br>
-            <br>
-            <input type="submit" value="Create Account"/>
-        </form>
-        <a href="{{ url_for('account.view_account') }}">Back to Account Management</a>
+        <br><label for="phone">Phone Number:</label><br>
+        <input type="text" id="phone" name="phone" value="{{ phone if phone is not none else '' }}"/>*
+        <span id="phone_error"></span><br>
+        <br><br>
+        <input type="submit" value="Create Account"/>
+    </form>
 {% include 'footer.html' %}
 
 <script src="{{ url_for('static', filename='js/accountformvalidation.js') }}"></script>

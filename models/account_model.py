@@ -106,6 +106,17 @@ class UserAccount(db.Model):
             db.session.rollback()
             raise ValueError("An error occurred while saving user profile. ")
 
+    @classmethod
+    def update_password(cls,account_id, password):
+        account = cls.query.get(account_id)
+        account.password = password
+        account.set_password(password)
+        try:
+            db.session.commit()
+        except IntegrityError:
+            db.session.rollback()
+            raise ValueError("An error occurred while saving new password. ")
+
 
     @classmethod
     def suspend_account(cls, account_id):
@@ -127,3 +138,5 @@ class UserAccount(db.Model):
              cls.phone_number.ilike(f'%{query}%')
         ).all()
         return results
+
+

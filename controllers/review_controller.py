@@ -10,7 +10,7 @@ class ReviewController:
     @login_required
     def write_review(agent_id):
         agent = UserAccount.query.get(agent_id)
-        return render_template('review/create_review.html', agent=agent)  # Corrected template path
+        return render_template('review/create_review.html', agent=agent, title='Write a Review')
 
     # Route to handle the review submission
     @review_bp.route('/submit_review', methods=['POST'])
@@ -28,24 +28,11 @@ class ReviewController:
 
         return redirect(url_for('account.view_agent', agent_id=agent_id))
 
-    # Route to display reviews for a specific agent
+    # Agent to see review
     @review_bp.route('/view_reviews/<int:agent_id>', methods=['GET'])
     @login_required
     @agent_only
     def view_reviews(agent_id):
         agent = UserAccount.query.get_or_404(agent_id)
         reviews = Review.query.filter_by(agent_id=agent_id).all()
-        return render_template('review/view_reviews.html', agent=agent, reviews=reviews)
-
-    # controllers.py
-
-    @review_bp.route('/view_agent/<int:agent_id>', methods=['GET'])
-    @login_required
-    def view_agent(agent_id):
-        agent = UserAccount.query.get_or_404(agent_id)
-        reviews = Review.query.filter_by(agent_id=agent_id).all()  # Fetch all reviews for this agent
-        for each in reviews:
-            print(each)
-        return render_template('agent/view_agent.html', agent=agent)
-
-
+        return render_template('review/view_reviews.html', agent=agent, reviews=reviews, title='My Review')

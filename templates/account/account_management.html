@@ -1,16 +1,18 @@
 {% include 'header.html' %}
 
     <h1>Profile Management</h1>
-    <h2>Create New Account</h2>
-    <button onclick="window.location.href='{{ url_for('account.create_account') }}'">Create Account</button>
-    <hr>    
-    <h2>Existing Accounts</h2>
+    <br><br>
     <form action="{{ url_for('account.search_account') }}" method="GET">
-        <label for="query">Search Account:</label>
-        <input type="text" name="query" placeholder="Search Account" value="{{ request.args.get('query', '') }}">
-        <input type="submit" value="Search">
-        <a href="{{ url_for('account.view_account') }}">Clear</a>
+        <a class='create-button account-button' onclick="window.location.href='{{ url_for('account.create_account') }}'">
+            Create Account
+        </a>
+        <span style="float: right;">
+            <input type="text" name="query" placeholder="Search Account" value="{{ request.args.get('query', '') }}">
+            <input type="submit" value="Search">
+            <a href="{{ url_for('account.view_account') }}">Clear</a>
+        </span>
     </form>
+    <br><br>
 
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}

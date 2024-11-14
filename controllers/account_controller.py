@@ -74,6 +74,21 @@ class UpdateAccountController:
 
         return render_template('account/update_account.html', account=account, roles=roles, title='Update Account')
 
+# Change Password Controller
+@account_bp.route('/change_password/<int:id>', methods=['GET', 'POST'])
+def change_password(id):
+    account = UserAccount.get_account_by_id(id)
+    if request.method == 'POST':
+        new_password = request.form.get('new_password')
+        confirm_password = request.form.get('confirm_password')
+
+        if new_password != confirm_password:
+            flash("Passwords do not match", "danger")
+        else:
+            account.update_password(account.id, new_password)
+            flash("Password changed successfully", "success")
+
+    return render_template('account/change_password.html', title='Change Password', account=account)
 
 # Suspend Account Controller
 class SuspendProfileController:

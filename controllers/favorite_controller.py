@@ -35,7 +35,7 @@ class FavoriteController:
     def view_favorites(user_id):
         listings = Favorite.get_favorite_listings(user_id)
 
-        return render_template('car_listing/favorites.html', favorite_cars=listings, user_id=user_id)
+        return render_template('car_listing/favorites.html', favorite_cars=listings, user_id=user_id, title='My favorite')
 
     @favorites_bp.route('/search_favorites/<int:user_id>', methods=['GET'])
     @login_required
@@ -47,4 +47,5 @@ class FavoriteController:
         search_query = request.args.get('query', '')
         listings = Favorite.search_favorite_listings(user_id, search_query)
         return render_template('car_listing/favorites.html', favorite_cars=listings, user_id=user_id,
-                               search_query=search_query)
+                               search_query=search_query, title='My favorite')
+
