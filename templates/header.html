@@ -26,8 +26,8 @@
                 <a class="profile-icon">{{ username }} <i class="fa fa-user-circle"></i></a>
                 <div class="dropdown-content">
                     {% if session.get('role_id') == 1 %}
-                        <a  style="display: block;" href="{{ url_for('view_profile.view_profile') }}">Manage Profiles</a>
-                        <a href="{{ url_for('account.view_account') }}">Manage Users</a>
+                        <a  style="display: block;" href="{{ url_for('view_profile.view_profile') }}">Profile Management</a>
+                        <a href="{{ url_for('account.view_account') }}">User Management</a>
                     {% endif %}
                     {% if session.get('role_id') == 3 or session.get('role_id')==4 %}
                         <a href="{{ url_for('my_used_car_listing.car_listing')}}">My Cars</a>
