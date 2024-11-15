@@ -1,6 +1,4 @@
 import unittest
-import random
-from flask import session
 from app import db, app
 from models import UserAccount, UsedCarListing, Review, Favorite
 from werkzeug.security import generate_password_hash
@@ -10,22 +8,22 @@ class SellerActionsTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        # Set up Flask app and configure it for testing
         cls.app = app
         cls.app.config["TESTING"] = True
-        cls.app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///:memory:"  # In-memory database for testing
+        cls.app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///:memory:"
         cls.app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
-        # Initialize the database and add test users
         with cls.app.app_context():
-            db.session.query(UsedCarListing).filter_by(seller_username='sebastianwilliam').delete()
-            db.session.commit()
+            db.create_all()
 
+            # Delete any existing data related to test users to avoid conflicts
+            db.session.query(Review).filter(Review.agent_id == db.session.query(UserAccount.id).filter_by(
+                username="wonglonglong").scalar()).delete()
+            db.session.query(UsedCarListing).filter_by(seller_username='sebastianwilliam').delete()
             db.session.query(UserAccount).filter_by(username="sebastianwilliam").delete()
             db.session.query(UserAccount).filter_by(username="wonglonglong").delete()
+            db.session.commit()
 
-
-            db.create_all()
             cls.default_password = "12345678"
             cls.seller = UserAccount(
                 username="sebastianwilliam",
@@ -35,6 +33,7 @@ class SellerActionsTest(unittest.TestCase):
                 email="sebastian@gmail.com",
                 phone_number='84232156'
             )
+
             cls.agent = UserAccount(
                 username="wonglonglong",
                 password=generate_password_hash(cls.default_password),
@@ -43,9 +42,9 @@ class SellerActionsTest(unittest.TestCase):
                 email="wongll@gmail.com",
                 phone_number='91738172'
             )
+
             db.session.add(cls.seller)
             db.session.add(cls.agent)
-
             db.session.commit()
 
             cls.seller_id = cls.seller.id
@@ -56,29 +55,34 @@ class SellerActionsTest(unittest.TestCase):
         cls.app_context = cls.app.app_context()
         cls.app_context.push()
 
-
+    # Seller Login Testing
     def test_seller_login(self):
-        # Test the login functionality
         response = self.client.post(
             "/login",
             data={"username": "sebastianwilliam", "password": self.default_password},
             follow_redirects=True
         )
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b"/", response.data)  # Adjust based on the actual content in the index page
+        self.assertIn(b"/", response.data)
 
-        # Check that the session is set correctly
         with self.client.session_transaction() as session:
             self.assertEqual(session.get("username"), "sebastianwilliam")
+
+    # Seller Logout Testing
     def test_seller_logout(self):
-        self.client.post("/login", data={"username": "sebastianwilliam", "password": self.default_password},
-                         follow_redirects=True)
+        self.client.post("/login",
+                         data={"username": "sebastianwilliam",
+                               "password": self.default_password
+                               },
+                         follow_redirects=True
+                         )
         response = self.client.get("/logout", follow_redirects=True)
         self.assertEqual(response.status_code, 200)
         self.assertIn(b"Login", response.data)
         with self.client.session_transaction() as session:
             self.assertNotIn("username", session)
 
+    # Seller view its vehicle view count
     def test_seller_view_vehicle_view_count(self):
         self.client.post("/login",
                          data={"username": "sebastianwilliam",
@@ -105,6 +109,7 @@ class SellerActionsTest(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn(b"10 views", response.data)
 
+    # Seller view the vehicle count of being shortlisted
     def test_seller_view_vehicle_shortlist_count(self):
         self.client.post(
             "/login",
@@ -131,6 +136,7 @@ class SellerActionsTest(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn(b"5 times", response.data)
 
+    # Seller give ratings to agent
     def test_seller_rate_agent_success(self):
         self.client.post(
             "/login",

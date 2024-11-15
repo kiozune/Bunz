@@ -26,7 +26,8 @@ def generate_data():
                 listing = random.choice(car_listings)
 
                 # Check if this favorite already exists
-                existing_favorite = Favorite.query.filter_by(user_id=user.id, listing_id=listing.id).first()
+                existing_favorite = Favorite.query.filter_by(user_id=user.id,
+                                                             listing_id=listing.id).first()
 
                 if not existing_favorite:
                     try:
@@ -37,7 +38,8 @@ def generate_data():
                     except Exception as e:
                         print(f"Error adding favorite: {e}")
                 else:
-                    print(f"Favorite for user {user.username} and listing {listing.id} already exists.")
+                    print(f"Favorite for user {user.username} and "
+                          f"listing {listing.id} already exists.")
         db.session.commit()
 
         print("Data generation completed successfully.")

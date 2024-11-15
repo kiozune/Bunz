@@ -30,25 +30,20 @@ def generate_data():
         # Add reviews (buyers and sellers reviewing agents)
         reviews = []
         for _ in range(100):  # Add 100 random reviews
-            # Randomly choose a reviewer: buyer or seller
-            reviewer = random.choice(buyers + sellers)  # Both buyers and sellers can review agents
-
-            # Random agent to review
+            reviewer = random.choice(buyers + sellers)
             agent = random.choice(agents)
-
-            # Select a random comment from the pool
             comment = random.choice(comment_pool)
 
-            # Create the review
             try:
                 review = Review(
-                    agent_id=agent.id,  # Review is tagged to the agent
-                    rating=random.randint(1, 5),  # Random rating from 1 to 5
-                    comment=comment  # Random comment from the pool
+                    agent_id=agent.id,
+                    rating=random.randint(1, 5),
+                    comment=comment
                 )
                 db.session.add(review)
                 reviews.append(review)
-                print(f"Added review from {reviewer.username} for agent {agent.username} with rating {review.rating}")
+                print(f"Added review from {reviewer.username} for agent "
+                      f"{agent.username} with rating {review.rating}")
             except Exception as e:
                 print(f"Error adding review: {e}")
 

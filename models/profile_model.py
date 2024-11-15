@@ -65,7 +65,6 @@ class UserProfile(db.Model):
         profile.is_suspended = True
         try:
             db.session.commit()
-            return profile.role
         except IntegrityError:
             db.session.rollback()
             raise ValueError("An error occurred while saving user profile. ")

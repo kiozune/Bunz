@@ -43,7 +43,7 @@ def generate_data():
                     role_id=profile.id,
                     role_name=profile.role,
                     email="admin@example.com",
-                    phone_number=random.randint(1000000000, 9999999999),  # Integer phone number
+                    phone_number=random.randint(1000000000, 9999999999),
                     is_suspended=False
                 )
                 db.session.add(user)
@@ -57,7 +57,7 @@ def generate_data():
                         role_id=profile.id,
                         role_name=profile.role,
                         email=fake.unique.email(),
-                        phone_number=random.randint(1000000000, 9999999999),  # Integer phone number
+                        phone_number=random.randint(1000000000, 9999999999),
                         is_suspended=random.choice([True, False])
                     )
                     db.session.add(user)
@@ -68,9 +68,11 @@ def generate_data():
         # Add car listings
         car_listings = []
         for _ in range(100):
-            car_brands = ["Toyota", "Honda", "Ford", "BMW", "Mercedes", "Audi", "Chevrolet", "Nissan", "Hyundai",
+            car_brands = ["Toyota", "Honda", "Ford", "BMW", "Mercedes", "Audi",
+                          "Chevrolet", "Nissan", "Hyundai",
                           "Volkswagen"]
-            car_models = ["Camry", "Civic", "Mustang", "X5", "A-Class", "A4", "Impala", "Altima", "Sonata", "Golf"]
+            car_models = ["Camry", "Civic", "Mustang", "X5", "A-Class", "A4",
+                          "Impala", "Altima", "Sonata", "Golf"]
             car_years = list(range(2000, 2025))
             fuel_types = ["Petrol", "Diesel", "Electric", "Hybrid"]
             transmissions = ["Manual", "Automatic"]
