@@ -71,8 +71,6 @@ class UserAccount(db.Model):
             db.session.commit()
         except IntegrityError as e:
             db.session.rollback()
-            print(e)
-            print(f'Creating account with username: {username}, email: {email}, role_id: {role_id}, phone: {phone}')
             raise ValueError("An error occurred while saving user profile. ")
 
     # Retrieve all user accounts details

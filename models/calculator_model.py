@@ -8,7 +8,8 @@ class Calculator:
         monthly_interest_rate = self.annual_interest_rate / 100 / 12
         number_of_payments = self.years * 12
         monthly_payment = (self.principal * monthly_interest_rate) / (1 - (1 + monthly_interest_rate) ** -number_of_payments)
+        result = monthly_payment
         try:
-            return float("{:.2f}".format(monthly_payment))
+            return float("{:.2f}".format(result))
         except ValueError as e:
             raise ValueError()

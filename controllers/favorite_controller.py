@@ -1,5 +1,5 @@
 from flask import Blueprint, request, render_template, flash, redirect, url_for, session
-from models.account_model import UserAccount,db
+from models.account_model import UserAccount, db
 from models.favorites_model import Favorite
 from models.used_car_model import UsedCarListing
 from utils import login_required
@@ -30,6 +30,7 @@ class FavoriteController:
             flash(str(e), "error")
             return redirect(request.referrer)
 
+class ViewFavoriteController:
     @favorites_bp.route('/view_favorites/<int:user_id>', methods=['GET'])
     @login_required
     def view_favorites(user_id):
@@ -37,6 +38,7 @@ class FavoriteController:
 
         return render_template('car_listing/favorites.html', favorite_cars=listings, user_id=user_id, title='My favorite')
 
+class SearchFavoriteController:
     @favorites_bp.route('/search_favorites/<int:user_id>', methods=['GET'])
     @login_required
     def search_favorites(user_id):

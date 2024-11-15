@@ -64,7 +64,7 @@ class ViewCarController:
         return render_template('car_listing/view_car_listing.html', car_listings=listings, title='Car Listing')
 
 
-class MyCarController:
+class MyCarListingController:
     @staticmethod
     @my_used_car_bp.route('/my_car', methods=['GET'])
     @login_required
