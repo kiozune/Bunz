@@ -1,5 +1,5 @@
 from flask import Blueprint, request, render_template, flash, redirect, url_for, session
-from models.account_model import UserAccount,db
+from models.account_model import UserAccount, db
 from models.favorites_model import Favorite
 from models.used_car_model import UsedCarListing
 from utils import login_required

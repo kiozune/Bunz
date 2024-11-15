@@ -35,5 +35,5 @@ class ViewReviewController:
     @agent_only
     def view_reviews(agent_id):
         agent = UserAccount.query.get_or_404(agent_id)
-        reviews = Review.query.filter_by(agent_id=agent_id).all()
+        reviews = Review.get_reviews_by_id(agent_id)
         return render_template('review/view_reviews.html', agent=agent, reviews=reviews, title='My Review')

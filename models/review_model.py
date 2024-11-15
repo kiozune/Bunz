@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 from models import db  # Import db instance
+from sqlalchemy.exc import IntegrityError
 
 class Review(db.Model):
     __tablename__ = 'reviews'
@@ -22,4 +23,12 @@ class Review(db.Model):
         # Create a review for the given agent
         review = cls(agent_id=agent_id, rating=rating, comment=comment)
         db.session.add(review)
-        db.session.commit()
+        try:
+            db.session.commit()
+        except IntegrityError:
+            db.session.rollback()
+            raise ValueError("An error occurred while saving user profile. ")
+
+    @classmethod
+    def get_reviews_by_id(cls, agent_id):
+        return cls.query.filter_by(agent_id=agent_id).all()
